@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:31:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/19 17:45:11 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/22 14:37:51 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,6 @@
 # include <signal.h>
 # include "libft/srcs/libft.h"
 
-typedef enum e_token
-{
-	COMMAND,
-	FLAG,
-	INPUT,
-	ERROR
-}	t_token;
-
 typedef struct s_env
 {
 	char			*data;
@@ -48,9 +40,5 @@ typedef struct s_data
 	t_env	*env;
 	char	**args;
 }	t_data;
-
-t_env	*ft_lstnew(int data);
-void	ft_lstadd_back(t_env **env, t_env *new);
-int		ft_lstsize(t_env *head);
 
 #endif

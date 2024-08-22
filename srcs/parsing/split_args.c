@@ -1,94 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_args.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/08/22 14:44:07 by gwagner           #+#    #+#             */
+/*   Updated: 2024/08/22 14:48:11 by gwagner          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "args.h"
 
-int is_space(char c)
-{
-	if (c <= 32)
-		return (1);
-	else
-		return (0);
-}
-
-int wordlen(char *line)
-{
-	int len;
-
-	len = 0;
-	while (!is_space(*line))
-	{
-		len++;
-		line++;
-	}
-	return (len);
-}
-
-t_token     check_quote(char c)
-{
-	if (c == '"')
-		return (DOUBLE_QUOTE);
-	else if (c == '\'')
-		return (QUOTE);
-}
-
-int eat_space(char *line, int i)
-{
-	while (is_space(line[i]) && line[i])
-		i++;
-	return (i);
-}
-
-int putcmd(t_args **list, char *line, int *i)
-{
-	t_args  *new;
-	char    *cmd;
-
-	cmd = ft_substr(line, *i, wordlen(line + *i));
-	new = ft_lstnew(cmd, CMD);
-	ft_lstadd_back(list, new);
-	*i += wordlen(line + *i);
-	return (0);
-}
-
-int quotecheck(char *line, int i, char quote)
-{
-	i++;
-	while (line[i] && line[i] != quote)
-		i++;
-	if (!line[i])
-		return (0);
-	return (1);
-}
-
-int quotelen(char *line, char quote)
-{
-	int len;
-
-	len = 1;
-	while (line[len] && line[len] != quote)
-		len++;
-	len++;
-	return (len);
-}
-
-int putquote(t_args **list, char *line, int i, char quote)
-{
-	t_args  *new;
-	char    *cmd;
-
-	cmd = ft_substr(line, i, quotelen(line + i, quote));
-	new = ft_lstnew(cmd, check_quote(quote));
-	ft_lstadd_back(list, new);
-	i += quotelen(line + i, quote);
-	return (i);
-}
-
-int check_redir(char *line, int i)
-{
-	if (line[i] == '<' || line[i] == '>')
-		return (1);
-	return (0);
-}
-
-int check_rtype(char *line, int i)
+int	check_rtype(char *line, int i)
 {
 	if (line[i] == '<')
 	{
@@ -106,9 +30,9 @@ int check_rtype(char *line, int i)
 	}
 }
 
-int putredir(t_args **list, char *line, int i, int *cmd)
+int	putredir(t_args **list, char *line, int i, int *cmd)
 {
-	t_args  *new;
+	t_args	*new;
 
 	*cmd = 0;
 	if (line[i] == '<')
@@ -129,9 +53,9 @@ int putredir(t_args **list, char *line, int i, int *cmd)
 	return (check_rtype(line, i));
 }
 
-int putpipe(t_args **list, char *line, int *i)
+int	putpipe(t_args **list, char *line, int *i)
 {
-	t_args  *new;
+	t_args	*new;
 
 	new = ft_lstnew(NULL, PIPE);
 	ft_lstadd_back(list, new);
@@ -139,10 +63,10 @@ int putpipe(t_args **list, char *line, int *i)
 	return (1);
 }
 
-int putarg(t_args **list, char *line, int i)
+int	putarg(t_args **list, char *line, int i)
 {
-	t_args  *new;
-	char    *arg;
+	t_args	*new;
+	char	*arg;
 
 	arg = ft_substr(line, i, wordlen(line + i));
 	new = ft_lstnew(arg, ARG);
@@ -151,11 +75,11 @@ int putarg(t_args **list, char *line, int i)
 	return (i);
 }
 
-t_args    *split_args(char *line)
+t_args	*split_args(char *line)
 {
-	t_args  *list;
-	int     i;
-	int     cmd;
+	t_args	*list;
+	int		i;
+	int		cmd;
 
 	list = NULL;
 	i = 0;
@@ -169,21 +93,11 @@ t_args    *split_args(char *line)
 			cmd = putpipe(&list, line, &i);
 		else if (cmd)
 			cmd = putcmd(&list, line, &i);
-		else if ((line[i] == '"' || line[i] == '\'') && quotecheck(line, i, line[i]))
+		else if ((line[i] == '"' || line[i] == '\'')
+			&& quotecheck(line, i, line[i]))
 			i = putquote(&list, line, i, line[i]);
 		else if (line[i])
 			i = putarg(&list, line, i);
 	}
 	return (list);
-}
-
-int main(int argc, char **argv)
-{
-	t_args	*args;
-	t_args	*tmp;
-
-	args = split_args("ls -l | cat -e \"afeaingfuieg augfhbgiueabg eareujat\" > file < aeiogjaoiejg aejfgoijaegoij | aefigoiaejgi << aopgjegopjaeog          ");
-	ft_printlst(args);
-	free_list(&args);
-	return (0);
 }
