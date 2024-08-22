@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:38:57 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/22 14:51:41 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/22 15:40:59 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include "../../includes/minishell.h"
+# include "../../../includes/minishell.h"
 
 typedef enum e_token
 {

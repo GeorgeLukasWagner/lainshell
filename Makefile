@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
+#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/22 12:09:19 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/08/22 15:34:16 by gwagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,7 @@ EXEC_OBJS		=	$(EXEC_SRCS:.c=.o)
 OBJS			=	$(MAIN_SRC:.c=.o) $(PARSE_OBJS) $(EXEC_OBJS)
 
 BLUE		=	\033[0;94m
-RED			=	\033[0;91m
+RED 		=	\033[0;91m
 GREEN		=	\033[0;92m
 YELLOW		=	\e[0;33m
 CYAN		=	\033[0;96m
