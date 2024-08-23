@@ -6,11 +6,13 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:44:13 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 13:20:55 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	g_signum = 0;
 
 void	lain_loop(char **envp)
 {
@@ -21,6 +23,8 @@ void	lain_loop(char **envp)
 	while (1)
 	{
 		lain = readline("lainshell:");
+		if (!lain)
+			break ;
 		if (lain[0] != '\0')
 		{
 			add_history(lain);
