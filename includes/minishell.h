@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:31:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:24:29 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 14:11:17 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

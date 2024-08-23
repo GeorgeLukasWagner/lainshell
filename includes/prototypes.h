@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:21:40 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 15:42:42 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ int		quotecheck(char *line, int i, char quote);
 int		putcmd(t_args **list, char *line, int *i);
 int		quotelen(char *line, char quote);
 int		syntax_error(t_args *list);
+void	ft_pwd(void);
+int		ft_cd(t_args *arg);
 
 #endif

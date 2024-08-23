@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 13:20:55 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:04:56 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	lain_loop(char **envp)
 	(void)envp;
 	while (1)
 	{
-		lain = readline("lainshell:");
+		lain = readline("\033[1;32mlainshell\033[0m:");
 		if (!lain)
 			break ;
 		if (lain[0] != '\0')
@@ -30,6 +30,11 @@ void	lain_loop(char **envp)
 			add_history(lain);
 			args = split_args(lain);
 			syntax_error(args);
+			if (ft_strncmp(args->data, "pwd", ft_strlen(args->data)) == 0)
+				ft_pwd();
+			else if (ft_strncmp(args->data, "cd", ft_strlen(args->data)) == 0)
+				ft_cd(args);
+			ft_printlst(args);
 			free_list(&args);
 		}
 	}
