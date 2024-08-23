@@ -1,39 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:44:13 by gwagner          ###   ########.fr       */
+/*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
+/*   Updated: 2024/08/23 10:22:45 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#ifndef STRUCTS_H
+# define STRUCTS_H
 
-void	lain_loop(char **envp)
+typedef enum e_token
 {
-	char		*lain;
-	t_args		*args;
+	CMD,
+	ARG,
+	QUOTE,
+	DOUBLE_QUOTE,
+	REDIR_IN,
+	REDIR_OUT,
+	PIPE,
+	HERE_DOC,
+	REDIR_APPEND
+}		t_token;
 
-	(void)envp;
-	while (1)
-	{
-		lain = readline("lainshell:");
-		if (lain[0] != '\0')
-		{
-			add_history(lain);
-			args = split_args(lain);
-			syntax_error(args);
-			free_list(&args);
-		}
-	}
-}
-
-int	main(int ac, char **av, char **envp)
+typedef struct s_args
 {
-	(void)ac;
-	(void)av;
-	lain_loop(envp);
-}
+	char			*data;
+	t_token			token;
+	struct s_args	*next;
+}		t_args;
+
+typedef struct s_env
+{
+	char			*data;
+	struct s_env	*next;
+}	t_env;
+
+typedef struct s_data
+{
+	t_env	*env;
+	char	**args;
+}	t_data;
+
+#endif

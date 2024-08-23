@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:44:07 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/22 15:54:51 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 10:38:29 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,26 @@ int	putredir(t_args **list, char *line, int i, int *cmd)
 	if (line[i] == '<')
 	{
 		if (line[i + 1] == '<')
-			new = ft_lstnew("<<", HERE_DOC);
+			new = ft_lstnew(ft_strdup("<<"), HERE_DOC);
 		else
-			new = ft_lstnew("<", REDIR_IN);
+			new = ft_lstnew(ft_strdup("<"), REDIR_IN);
 	}
-	else if (line[i] == '>')
+	else
 	{
 		if (line[i + 1] == '>')
-			new = ft_lstnew(">>", REDIR_APPEND);
+			new = ft_lstnew(ft_strdup(">>"), REDIR_APPEND);
 		else
-			new = ft_lstnew(">", REDIR_OUT);
+			new = ft_lstnew(ft_strdup(">"), REDIR_OUT);
 	}
 	ft_lstadd_back(list, new);
 	return (check_rtype(line, i));
 }
 
-int	putpipe(t_args **list, char *line, int *i)
+int	putpipe(t_args **list, int *i)
 {
 	t_args	*new;
 
-	new = ft_lstnew("|", PIPE);
+	new = ft_lstnew(ft_strdup("|"), PIPE);
 	ft_lstadd_back(list, new);
 	*i += 1;
 	return (1);
@@ -90,7 +90,7 @@ t_args	*split_args(char *line)
 		if (check_redir(line, i))
 			i = putredir(&list, line, i, &cmd);
 		else if (line[i] == '|')
-			cmd = putpipe(&list, line, &i);
+			cmd = putpipe(&list, &i);
 		else if (cmd)
 			cmd = putcmd(&list, line, &i);
 		else if ((line[i] == '"' || line[i] == '\'')

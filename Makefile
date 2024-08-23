@@ -6,7 +6,7 @@
 #    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/22 15:34:16 by gwagner          ###   ########.fr        #
+#    Updated: 2024/08/23 10:33:04 by gwagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,17 +18,22 @@ LIBFT			=	$(LIBFT_DIR)libft.a
 
 PARSE_DIR		=	$(SRC_DIR)parsing/
 EXEC_DIR		=	$(SRC_DIR)execution/
+ARGS_DIR		=	$(PARSE_DIR)arguments/
+ERR_DIR 		=	$(PARSE_DIR)errorcheck/
 
 MAIN_SRC		=	$(SRC_DIR)minishell.c
-PARSE_SRC		=
+ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c
+ERR_SRC			=	syntax_error.c
 EXEC_SRC		=
 
-PARSE_SRCS		=	$(patsubst %.c,$(PARSE_DIR)%.c,$(PARSE_SRC))
+ARGS_SRCS		=	$(patsubst %.c,$(ARGS_DIR)%.c,$(ARGS_SRC))
+ERR_SRCS		=	$(patsubst %.c,$(ERR_DIR)%.c,$(ERR_SRC))
 EXEC_SRCS		=	$(patsubst %.c,$(EXEC_DIR)%.c,$(EXEC_SRC))
 
-PARSE_OBJS		=	$(PARSE_SRCS:.c=.o)
+ARGS_OBJS		=	$(ARGS_SRCS:.c=.o)
+ERR_OBJS		=	$(ERR_SRCS:.c=.o)
 EXEC_OBJS		=	$(EXEC_SRCS:.c=.o)
-OBJS			=	$(MAIN_SRC:.c=.o) $(PARSE_OBJS) $(EXEC_OBJS)
+OBJS			=	$(MAIN_SRC:.c=.o) $(ARGS_OBJS) $(ERR_OBJS) $(EXEC_OBJS)
 
 BLUE		=	\033[0;94m
 RED 		=	\033[0;91m

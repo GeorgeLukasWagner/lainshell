@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:42:26 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/22 15:43:16 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 10:23:40 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 # define ERROR_H
 
 # include "../../../includes/minishell.h"
-# include "../arguments/args.h"
 
 #endif

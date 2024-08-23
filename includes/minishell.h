@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:31:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/22 14:37:51 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 10:24:29 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,6 @@
 # include <sys/wait.h>
 # include <signal.h>
 # include "libft/srcs/libft.h"
-
-typedef struct s_env
-{
-	char			*data;
-	struct s_env	*next;
-}	t_env;
-
-typedef struct s_data
-{
-	t_env	*env;
-	char	**args;
-}	t_data;
+# include "prototypes.h"
 
 #endif

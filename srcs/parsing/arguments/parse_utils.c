@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:32:34 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/22 14:42:09 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 10:38:15 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ t_token	check_quote(char c)
 		return (DOUBLE_QUOTE);
 	else if (c == '\'')
 		return (QUOTE);
+	else
+		return (1);
 }
 
 int	eat_space(char *line, int i)
