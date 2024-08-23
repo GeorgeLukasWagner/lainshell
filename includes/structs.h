@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:22:45 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:04:56 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_env
 typedef struct s_data
 {
 	t_env	*env;
-	char	**args;
+	t_args	*args;
 }	t_data;
 
 #endif

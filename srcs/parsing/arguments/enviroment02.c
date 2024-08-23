@@ -1,18 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args.h                                             :+:      :+:    :+:   */
+/*   enviroment02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/22 14:38:57 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 15:25:35 by gwagner          ###   ########.fr       */
+/*   Created: 2024/08/23 15:41:04 by gwagner           #+#    #+#             */
+/*   Updated: 2024/08/23 16:25:56 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ARGS_H
-# define ARGS_H
+#include "args.h"
 
-# include "../../../includes/minishell.h"
+t_env	*init_env(char **envp)
+{
+	size_t	i;
+	t_env	*env;
+	t_env	*new;
 
-#endif
+	env = NULL;
+	i = 0;
+	while (envp[i])
+	{
+		new = env_lstnew(envp[i]);
+		env_lstadd_back(&env, new);
+		i++;
+	}
+	return (env);
+}

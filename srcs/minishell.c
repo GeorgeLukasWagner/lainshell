@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 15:07:15 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:25:37 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,10 @@
 
 int	g_signum = 0;
 
-void	lain_loop(char **envp)
+void	lain_loop(t_data data)
 {
 	char		*lain;
-	t_args		*args;
 
-	(void)envp;
 	while (1)
 	{
 		lain = readline("lainshell:");
@@ -28,9 +26,9 @@ void	lain_loop(char **envp)
 		if (lain[0] != '\0')
 		{
 			add_history(lain);
-			args = split_args(lain);
-			syntax_error(args);
-			free_list(&args);
+			data.args = split_args(lain);
+			syntax_error(data.args);
+			free_list(&data.args);
 			free(lain);
 		}
 	}
@@ -60,8 +58,11 @@ void	init_signal(void)
 
 int	main(int ac, char **av, char **envp)
 {
+	t_data	data;
+
 	(void)ac;
 	(void)av;
+	data.env = init_env(envp);
 	init_signal();
-	lain_loop(envp);
+	lain_loop(data);
 }

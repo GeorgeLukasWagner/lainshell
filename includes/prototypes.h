@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:21:40 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/23 16:16:29 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,11 @@ int		quotecheck(char *line, int i, char quote);
 int		putcmd(t_args **list, char *line, int *i);
 int		quotelen(char *line, char quote);
 int		syntax_error(t_args *list);
+t_env	*env_lstnew(char *data);
+t_env	*env_lstlast(t_env *head);
+void	env_lstadd_back(t_env **list, t_env *new);
+int		env_lstsize(t_env *head);
+void	free_env(t_env **list);
+t_env	*init_env(char **envp);
 
 #endif
