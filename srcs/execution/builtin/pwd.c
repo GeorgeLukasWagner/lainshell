@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/23 16:21:23 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/24 08:41:56 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_cd(t_args *arg)
 	t_args	*temp;
 
 	temp = arg;
-	if (!temp->next)
+	if (!temp->next || temp->next->token != ARG)
 	{
 		chdir("/home/hzakharc");		// change this to work with the env
 		return (0);
