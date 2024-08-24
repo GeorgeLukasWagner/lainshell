@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 16:16:29 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/24 12:01:27 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,9 @@ void	env_lstadd_back(t_env **list, t_env *new);
 int		env_lstsize(t_env *head);
 void	free_env(t_env **list);
 t_env	*init_env(char **envp);
+t_quotes	*newshmote(char shmote);
+void	shmotefront(t_quotes **list, t_quotes *new);
+void	freeshmote(t_quotes **list);
+void	shmotefrontremove(t_quotes **list);
 
 #endif
