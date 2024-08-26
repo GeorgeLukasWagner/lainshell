@@ -1,41 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arglist02.c                                        :+:      :+:    :+:   */
+/*   enviroment02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 20:21:32 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/24 10:12:40 by hzakharc         ###   ########.fr       */
+/*   Created: 2024/08/23 15:41:04 by gwagner           #+#    #+#             */
+/*   Updated: 2024/08/24 12:30:37 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "args.h"
 
-void	ft_printlst(t_args *head)
+t_env	*init_env(char **envp)
 {
-	t_args	*tmp;
+	size_t	i;
+	t_env	*env;
+	t_env	*new;
 
-	tmp = head;
-	while (tmp)
+	env = NULL;
+	i = 0;
+	while (envp[i])
 	{
-		printf("%s %d\n", tmp->data, tmp->token);
-		tmp = tmp->next;
+		new = env_lstnew(ft_strdup(envp[i]));
+		env_lstadd_back(&env, new);
+		i++;
 	}
-}
-
-void	free_list(t_args **list)
-{
-	t_args	*head;
-	t_args	*tmp;
-
-	head = *list;
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		if (tmp->data)
-			free(tmp->data);
-		free(tmp);
-	}
+	return (env);
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 15:42:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:24:58 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,25 @@ int		quotecheck(char *line, int i, char quote);
 int		putcmd(t_args **list, char *line, int *i);
 int		quotelen(char *line, char quote);
 int		syntax_error(t_args *list);
-void	ft_pwd(void);
-int		ft_cd(t_args *arg);
+t_env	*env_lstnew(char *data);
+t_env	*env_lstlast(t_env *head);
+void	env_lstadd_back(t_env **list, t_env *new);
+int		env_lstsize(t_env *head);
+void	free_env(t_env **list);
+t_env	*init_env(char **envp);
+int 	ft_pwd(void);
+int		ft_cd(t_data data);
+int 	ft_env(t_data data);
+int 	exec_built(char *cmd, t_data data);
+void	ft_printenv(t_env *head);
+t_env	*find_node(const char *to_find, t_env *env);
+int		ft_export(t_data data);
+t_exp	*exp_lstnew(char *name, char *value);
+t_exp	*exp_lstlast(t_exp *head);
+void	exp_lstadd_back(t_exp **list, t_exp *new);
+int		exp_lstsize(t_exp *head);
+void	free_exp(t_exp **list);
+t_exp	*init_exp(t_env *env);
+void	free_matrix(char **str);
 
 #endif

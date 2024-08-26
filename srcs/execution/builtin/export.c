@@ -1,41 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arglist02.c                                        :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 20:21:32 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/24 10:12:40 by hzakharc         ###   ########.fr       */
+/*   Created: 2024/08/26 12:46:18 by hzakharc          #+#    #+#             */
+/*   Updated: 2024/08/26 14:39:15 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "args.h"
+#include "built.h"
 
-void	ft_printlst(t_args *head)
+t_exp	*init_exp(t_env *env)
 {
-	t_args	*tmp;
+	t_env	*temp_env;
+	t_exp	*exp;
+	t_exp	*new;
+	char	**temp;
 
-	tmp = head;
-	while (tmp)
+	temp_env = env;
+	exp = NULL;
+	while (temp_env)
 	{
-		printf("%s %d\n", tmp->data, tmp->token);
-		tmp = tmp->next;
+		temp = ft_split(temp_env->data, '=');
+		new = exp_lstnew(temp[0], temp[1]);
+		free(temp);
+		exp_lstadd_back(&exp, new);
+		temp_env = temp_env->next;
 	}
-}
-
-void	free_list(t_args **list)
-{
-	t_args	*head;
-	t_args	*tmp;
-
-	head = *list;
-	while (head)
-	{
-		tmp = head;
-		head = head->next;
-		if (tmp->data)
-			free(tmp->data);
-		free(tmp);
-	}
+	return (exp);
 }

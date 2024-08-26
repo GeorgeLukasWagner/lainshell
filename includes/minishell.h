@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:31:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 14:11:17 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/26 14:08:15 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@
 # include <signal.h>
 # include "libft/srcs/libft.h"
 # include "prototypes.h"
+# include "structs.h"
 
 #endif
