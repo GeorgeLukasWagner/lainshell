@@ -6,7 +6,7 @@
 #    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/23 16:17:11 by gwagner          ###   ########.fr        #
+#    Updated: 2024/08/30 17:48:18 by gwagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ ARGS_DIR		=	$(PARSE_DIR)arguments/
 ERR_DIR 		=	$(PARSE_DIR)errorcheck/
 
 MAIN_SRC		=	$(SRC_DIR)minishell.c
-ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c
+ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c
 ERR_SRC			=	syntax_error.c
 EXEC_SRC		=
 
@@ -42,7 +42,7 @@ YELLOW		=	\e[0;33m
 CYAN		=	\033[0;96m
 COLOR		=	\033[0m
 
-CC				=	@cc -Wall -Werror -Wextra
+CC				=	@cc -Wall -Werror -Wextra -g
 RM				=	@rm -f
 
 NAME			=	lainshell

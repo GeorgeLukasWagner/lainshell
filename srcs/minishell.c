@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 16:25:37 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/30 15:15:33 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	lain_loop(t_data data)
 		{
 			add_history(lain);
 			data.args = split_args(lain);
+			put_vars(&data.args, data.env);
+			ft_printlst(data.args);
 			syntax_error(data.args);
 			free_list(&data.args);
 			free(lain);

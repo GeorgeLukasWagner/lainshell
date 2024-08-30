@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/24 11:39:12 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/25 16:53:28 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ typedef enum e_token
 {
 	CMD,
 	ARG,
-	QUOTE,
 	DOUBLE_QUOTE,
+	QUOTE,
 	REDIR_IN,
 	REDIR_OUT,
 	PIPE,

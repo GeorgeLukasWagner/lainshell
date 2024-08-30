@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:44:07 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 16:26:12 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/25 15:35:21 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,3 @@ t_args	*split_args(char *line)
 	}
 	return (list);
 }
-
-//TODO: reimplement the quotes to work with nested quotes
