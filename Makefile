@@ -6,7 +6,7 @@
 #    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/26 14:20:38 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/08/30 22:24:17 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MAIN_SRC		=	$(SRC_DIR)minishell.c
 ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c
 ERR_SRC			=	syntax_error.c
 EXEC_SRC		=	
-BUILT_SRC		=	pwd.c env.c export.c export_lst.c
+BUILT_SRC		=	pwd.c env.c export.c
 
 ARGS_SRCS		=	$(patsubst %.c,$(ARGS_DIR)%.c,$(ARGS_SRC))
 ERR_SRCS		=	$(patsubst %.c,$(ERR_DIR)%.c,$(ERR_SRC))

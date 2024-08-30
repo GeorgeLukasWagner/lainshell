@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/26 14:22:48 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/30 15:19:50 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,15 @@ typedef struct s_args
 
 typedef struct s_env
 {
+	int				printed;
 	char			*data;
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_exp
-{
-	int				printed;
-	char			*name;
-	char			*value;
-	struct s_exp	*next;
-}	t_exp;
 typedef struct s_data
 {
 	t_env	*env;
 	t_args	*args;
-	t_exp	*exp;
 }	t_data;
 
 

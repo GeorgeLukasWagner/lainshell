@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/26 14:24:58 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/30 22:28:27 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,6 @@ int 	exec_built(char *cmd, t_data data);
 void	ft_printenv(t_env *head);
 t_env	*find_node(const char *to_find, t_env *env);
 int		ft_export(t_data data);
-t_exp	*exp_lstnew(char *name, char *value);
-t_exp	*exp_lstlast(t_exp *head);
-void	exp_lstadd_back(t_exp **list, t_exp *new);
-int		exp_lstsize(t_exp *head);
-void	free_exp(t_exp **list);
-t_exp	*init_exp(t_env *env);
 void	free_matrix(char **str);
 
 #endif

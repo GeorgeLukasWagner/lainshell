@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:25:20 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/26 12:45:54 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/30 18:07:21 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_env	*env_lstnew(char *data)
 	if (new == NULL)
 		return (NULL);
 	new->data = data;
+	new->printed = 0;
 	new->next = NULL;
 	return (new);
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/26 14:21:10 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/30 22:24:33 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	data.env = init_env(envp);
-	data.exp = init_exp(data.env);
 	init_signal();
 	lain_loop(data);
 }
