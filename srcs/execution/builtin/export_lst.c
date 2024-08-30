@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:39:41 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/26 14:24:54 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/28 17:50:44 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,11 @@ t_exp	*exp_lstnew(char *name, char *value)
 	if (!new)
 		return (NULL);
 	new->name = name;
-	new->value = value;
+	if (value == NULL)
+		new->value = ft_strdup("");
+	else
+		new->value = value;
+	new->printed = 0;
 	new->next = NULL;
 	return (new);
 }

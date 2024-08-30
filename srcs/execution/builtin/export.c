@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/26 12:46:18 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/26 14:39:15 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/27 16:47:29 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_exp	*init_exp(t_env *env)
 	exp = NULL;
 	while (temp_env)
 	{
+		if (ft_strncmp("_=/", temp_env->data, 3) == 0)
+			temp_env = temp_env->next;
 		temp = ft_split(temp_env->data, '=');
 		new = exp_lstnew(temp[0], temp[1]);
 		free(temp);
