@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:32:34 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 10:38:15 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 09:33:10 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,23 @@ int	eat_space(char *line, int i)
 {
 	while (is_space(line[i]) && line[i])
 		i++;
+	return (i);
+}
+
+int quotewordlen(char *line, int i)
+{
+	int	inquote;
+
+	inquote = 0;
+	while (line[i])
+	{
+		if (is_space(line[i]) && !inquote)
+			break ;
+		if ((line[i] == '\'' || line[i] == '\"') && !inquote)
+			inquote = line[i];
+		else if (line[i] == inquote)
+			inquote = 0;
+		i++;
+	}
 	return (i);
 }

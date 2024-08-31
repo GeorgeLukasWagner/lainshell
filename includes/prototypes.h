@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 08:38:52 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/31 09:59:28 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int		ft_export(t_data data);
 void	free_matrix(char **str);
 int		export_exist(char *data, t_env *env);
 int		ft_unset(t_data data);
+int 	quotewordlen(char *line, int i);
+void 	trim_quotes(t_args **list);
 
 #endif
