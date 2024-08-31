@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/26 17:08:43 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 08:38:52 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,15 @@ int		env_lstsize(t_env *head);
 void	free_env(t_env **list);
 t_env	*init_env(char **envp);
 void	put_vars(t_args **list, t_env *env);
+int 	ft_pwd(t_data data);
+int		ft_cd(t_data data);
+int 	ft_env(t_data data);
+int 	exec_built(char *cmd, t_data data);
+void	ft_printenv(t_env *head);
+t_env	*find_node(const char *to_find, t_env *env);
+int		ft_export(t_data data);
+void	free_matrix(char **str);
+int		export_exist(char *data, t_env *env);
+int		ft_unset(t_data data);
 
 #endif

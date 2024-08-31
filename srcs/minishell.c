@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/30 15:15:33 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 08:41:04 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	lain_loop(t_data data)
 
 	while (1)
 	{
-		lain = readline("lainshell:");
+		lain = readline("\033[1;32mlainshell:\033[0m");
 		if (!lain)
 			break ;
 		if (lain[0] != '\0')
@@ -28,8 +28,8 @@ void	lain_loop(t_data data)
 			add_history(lain);
 			data.args = split_args(lain);
 			put_vars(&data.args, data.env);
-			ft_printlst(data.args);
 			syntax_error(data.args);
+			exec_built(data.args->data, data);
 			free_list(&data.args);
 			free(lain);
 		}

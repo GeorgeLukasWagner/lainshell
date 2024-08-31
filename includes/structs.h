@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/25 16:53:28 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 08:39:01 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_args
 
 typedef struct s_env
 {
+	int				printed;
 	char			*data;
 	struct s_env	*next;
 }	t_env;
@@ -50,5 +51,6 @@ typedef struct s_data
 	t_env	*env;
 	t_args	*args;
 }	t_data;
+
 
 #endif

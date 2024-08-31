@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   enviroment02.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 15:41:04 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/23 16:25:56 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/24 12:30:37 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_env	*init_env(char **envp)
 	i = 0;
 	while (envp[i])
 	{
-		new = env_lstnew(envp[i]);
+		new = env_lstnew(ft_strdup(envp[i]));
 		env_lstadd_back(&env, new);
 		i++;
 	}
