@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:18:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/31 00:29:08 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/31 02:29:48 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ int	valid_name(char *arg)
 	return (0);
 }
 
-static int	export_exist(char *data, t_env *env)
+int	export_exist(char *data, t_env *env)
 {
 	t_env	*temp;
 	char	*temp_str;
