@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/31 06:10:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/31 14:04:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,37 +46,32 @@ int	ft_pwd(t_data data)
 static void	change_dir_env(t_env **env)
 {
 	t_env	*pwd;
-	char	*s_pwd;
 	t_env	*oldpwd;
-	char	*s_oldpwd;
+	char	*s_pwd;
 
 	pwd = find_node("PWD=", *env);
 	oldpwd = find_node("OLDPWD=", *env);
 	if (pwd == NULL || oldpwd == NULL)
 		return ;
-	s_pwd = ft_strdup(pwd->data);
-	s_oldpwd = ft_strdup(oldpwd->data);
 	free(oldpwd->data);
-	oldpwd->data = ft_strjoin("OLD", s_pwd);
+	oldpwd->data = ft_strjoin("OLDPWD=", pwd->data + 4);
 	free(pwd->data);
-	pwd->data = ft_substr(s_oldpwd, 3, ft_strlen(s_oldpwd));
+	s_pwd = getcwd(NULL, 0);
+	pwd->data = ft_strjoin("PWD=", s_pwd);
 	free(s_pwd);
-	free(s_oldpwd);
 }
 
 static char	*find_home(t_data data)
 {
 	t_env	*home;
-	char	*res;
 
 	home = find_node("HOME=", data.env);
 	if (home == NULL)
 		return (NULL);
-	res = ft_strtrim(home->data, "HOME=");
-	return (res);
+	return (ft_substr(home->data, 5, ft_strlen(home->data) - 5));
 }
 
-static int		ft_cd_util(t_data data)
+static int	ft_cd_util(t_data data)
 {
 	t_args	*temp;
 
@@ -91,7 +86,7 @@ static int		ft_cd_util(t_data data)
 	}
 	if (chdir(temp->next->data) != 0)
 	{
-		printf("cd: %s: No such directory\n", temp->data);
+		printf("cd: %s: No such directory\n", temp->next->data);
 		return (-1);
 	}
 	else
@@ -107,18 +102,16 @@ int		ft_cd(t_data data)
 	char	*home;
 
 	temp = data.args;
-	if (!temp->next || temp->next->token != ARG)
+	if (!temp->next)
 	{
 		home = find_home(data);
 		if (home)
 		{
 			chdir(home);
-			free(home);
 			change_dir_env(&data.env);
+			free(home);
 			return (0);
 		}
-		else
-			return (-1);
 	}
 	return (ft_cd_util(data));
 }
