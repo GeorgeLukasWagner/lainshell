@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arglist02.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 20:21:32 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/24 10:12:40 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:07:13 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_printlst(t_args *head)
 	tmp = head;
 	while (tmp)
 	{
-		printf("%s %d\n", tmp->data, tmp->token);
+		printf("%s %d %d\n", tmp->data, tmp->token, tmp->append);
 		tmp = tmp->next;
 	}
 }

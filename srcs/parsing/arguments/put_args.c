@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:34:48 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 09:33:04 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 12:09:59 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int	putquote(t_args **list, char *line, int i, char quote)
 	t_args	*new;
 	char	*cmd;
 
-	cmd = ft_substr(line, i, quotewordlen(line, i));
+	cmd = ft_substr(line, i, quotelen(line + i, quote));
 	new = ft_lstnew(cmd, check_quote(quote));
 	ft_lstadd_back(list, new);
-	i += quotewordlen(line + i, quote);
+	i += quotelen(line + i, quote);
+	if (!is_space(line[i]))
+		new->append = true;
 	return (i);
 }
 
