@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/31 06:10:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/08/31 12:38:07 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ int		ft_cd(t_data data)
 	char	*home;
 
 	temp = data.args;
-	if (!temp->next || temp->next->token != ARG)
+	if (temp->next->token != ARG || !temp->next)
 	{
 		home = find_home(data);
 		if (home)
@@ -117,8 +117,6 @@ int		ft_cd(t_data data)
 			change_dir_env(&data.env);
 			return (0);
 		}
-		else
-			return (-1);
 	}
 	return (ft_cd_util(data));
 }
