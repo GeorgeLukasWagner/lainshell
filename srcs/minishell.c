@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 12:29:44 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 14:00:06 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ void	lain_loop(t_data data)
 	{
 		lain = readline("\033[1;32mlainshell:\033[0m");
 		if (!lain)
-			break ;
+		{
+			free_env(&data.env);
+			exit(0);
+		}
 		if (lain[0] != '\0')
 		{
 			add_history(lain);
