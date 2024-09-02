@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 10:40:35 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/02 18:55:45 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,10 @@ typedef struct s_data
 	t_args	*args;
 }	t_data;
 
+typedef struct s_cmd
+{
+	char			**argv;
+	struct s_cmd	*next;
+} t_cmd;
 
 #endif
