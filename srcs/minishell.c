@@ -6,13 +6,11 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 14:00:06 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 20:28:35 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	g_signum = 0;
 
 void	lain_loop(t_data data)
 {
@@ -31,9 +29,11 @@ void	lain_loop(t_data data)
 			add_history(lain);
 			data.args = split_args(lain);
 			put_vars(&data.args, data.env);
+			//heredoc here
 			if (!syntax_error(data.args))
 			{
 				trim_quotes(&data.args);
+				ft_printlst(data.args);
 				exec_built(data.args->data, data);
 			}
 			free_list(&data.args);
@@ -44,7 +44,6 @@ void	lain_loop(t_data data)
 
 void	signal_handler(int signum)
 {
-	g_signum = signum;
 	if (signum == SIGINT)
 	{
 		ft_putstr_fd("\n", 1);

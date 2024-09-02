@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 10:40:35 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 20:39:26 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,6 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-typedef struct s_quotes
-{
-	char			quote;
-	struct s_quotes	*next;
-}		t_quotes;
-
 typedef struct s_data
 {
 	t_env	*env;
@@ -55,3 +49,4 @@ typedef struct s_data
 
 
 #endif
+// 

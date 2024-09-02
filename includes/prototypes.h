@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 09:59:28 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/08/31 20:19:13 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ int		ft_export(t_data data);
 void	free_matrix(char **str);
 int		export_exist(char *data, t_env *env);
 int		ft_unset(t_data data);
-int 	quotewordlen(char *line, int i);
+int 	quotewordlen(char *line);
 void 	trim_quotes(t_args **list);
+size_t	varlen(char *data);
+int		check_env(char *data, t_env *env);
 
 #endif
