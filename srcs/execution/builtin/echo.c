@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:48:27 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/03 10:59:17 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:59:52 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	is_flag(char *cmd)
 {
-	int	flag;
 	int	i;
 
 	i = 1;
@@ -36,7 +35,7 @@ int	ft_echo(t_cmd *cmd)
 	
 	i = 1;
 	nl = FALSE;
-	if (is_flag(cmd->argv) == FALSE)
+	if (is_flag(cmd->argv[i]) == FALSE)
 	{
 		while (is_flag(cmd->argv[i]) == FALSE)
 			i++;

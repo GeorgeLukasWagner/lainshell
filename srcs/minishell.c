@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/02 19:04:21 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:56:46 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lain_loop(t_data data)
 			{
 				trim_quotes(&data.args);
 				ft_printlst(data.args);
-				exec_built(data.args->data, data);
+				exec_built(data.args->data, &data);
 			}
 			free_list(&data.args);
 			free(lain);

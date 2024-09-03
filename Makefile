@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/31 18:57:55 by gwagner          ###   ########.fr        #
+#    Updated: 2024/09/03 13:57:19 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MAIN_SRC		=	$(SRC_DIR)minishell.c
 ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c argor.c var2.c
 ERR_SRC			=	syntax_error.c
 EXEC_SRC		=	
-BUILT_SRC		=	pwd.c env.c export.c unset.c
+BUILT_SRC		=	pwd.c env.c export.c unset.c echo.c
 
 ARGS_SRCS		=	$(patsubst %.c,$(ARGS_DIR)%.c,$(ARGS_SRC))
 ERR_SRCS		=	$(patsubst %.c,$(ERR_DIR)%.c,$(ERR_SRC))

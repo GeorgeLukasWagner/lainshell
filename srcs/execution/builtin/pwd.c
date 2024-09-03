@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/03 12:28:11 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/03 13:58:29 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	exec_built(char *cmd, t_data *data)
 {
 	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
-		return (ft_echo(data));
+		return (ft_echo(data->cmd));
 	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
 		return (ft_cd(data));
 	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
@@ -34,6 +34,8 @@ int	exec_built(char *cmd, t_data *data)
 int	matrix_size(char **matrix)
 {
 	int	i;
+
+	i = 0;
 	while (matrix[i] != NULL)
 		i++;
 	return (i);
@@ -96,7 +98,7 @@ static int	ft_cd_util(t_data *data)
 	}
 	else
 	{
-		change_dir_env(data->env);
+		change_dir_env(&data->env);
 		return (0);
 	}
 }
@@ -113,7 +115,7 @@ int		ft_cd(t_data *data)
 		if (home)
 		{
 			chdir(home);
-			change_dir_env(data->env);
+			change_dir_env(&data->env);
 			free(home);
 			return (0);
 		}
