@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/31 20:43:15 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/03 12:28:11 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-int	exec_built(char *cmd, t_data data)
+int	exec_built(char *cmd, t_data *data)
 {
-	// if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
-	// 	//coming soon
+	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
+		return (ft_echo(data));
 	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
 		return (ft_cd(data));
 	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
@@ -31,12 +31,20 @@ int	exec_built(char *cmd, t_data data)
 	return (-1);
 }
 
-int	ft_pwd(t_data data)
+int	matrix_size(char **matrix)
+{
+	int	i;
+	while (matrix[i] != NULL)
+		i++;
+	return (i);
+}
+
+int	ft_pwd(t_data *data)
 {
 	char	*pwd;
 	t_env	*node;
 
-	node = find_node("PWD=", data.env);
+	node = find_node("PWD=", data->env);
 	pwd = ft_substr(node->data, 4, ft_strlen(node->data));
 	printf("%s\n", pwd);
 	free(pwd);
@@ -61,54 +69,51 @@ static void	change_dir_env(t_env **env)
 	free(s_pwd);
 }
 
-static char	*find_home(t_data data)
+static char	*find_home(t_data *data)
 {
 	t_env	*home;
 
-	home = find_node("HOME=", data.env);
+	home = find_node("HOME=", data->env);
 	if (home == NULL)
 		return (NULL);
 	return (ft_substr(home->data, 5, ft_strlen(home->data) - 5));
 }
 
-static int	ft_cd_util(t_data data)
+static int	ft_cd_util(t_data *data)
 {
-	t_args	*temp;
+	t_cmd	*temp;
 
-	temp = data.args;
-	if (temp->next->next)
+	temp = data->cmd;
+	if (matrix_size(temp->argv) >= 3)
 	{
-		if (temp->next->next->token == ARG)
-		{
-			printf("cd: too many arguments\n");
-			return (-1);
-		}
+		printf("cd: too many arguments\n");
+		return (-1);
 	}
-	if (chdir(temp->next->data) != 0)
+	if (chdir(temp->argv[1]) != 0)
 	{
-		printf("cd: %s: No such directory\n", temp->next->data);
+		printf("cd: %s: No such directory\n", temp->argv[1]);
 		return (-1);
 	}
 	else
 	{
-		change_dir_env(&data.env);
+		change_dir_env(data->env);
 		return (0);
 	}
 }
 
-int		ft_cd(t_data data)
+int		ft_cd(t_data *data)
 {
-	t_args	*temp;
+	t_cmd	*temp;
 	char	*home;
 
-	temp = data.args;
-	if (!temp->next)
+	temp = data->cmd;
+	if (matrix_size(temp->argv) == 1)
 	{
 		home = find_home(data);
 		if (home)
 		{
 			chdir(home);
-			change_dir_env(&data.env);
+			change_dir_env(data->env);
 			free(home);
 			return (0);
 		}

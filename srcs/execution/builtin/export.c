@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:18:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/31 02:29:48 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:17:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,30 +173,31 @@ static void	add_exp2(char *str, t_env *env)
 	}
 }
 
-int	ft_export(t_data data)
+int	ft_export(t_data *data)
 {
-	t_args	*cur;
+	t_cmd	*temp;
+	int		i;
 
-	cur = data.args;
-	if (cur->next == NULL || cur->next->token != ARG)
-		print_export(data.env);
-	cur = cur->next;
-	while (cur && cur->token == ARG)
+	temp = data->cmd;
+	if (matrix_size(temp->argv) == 1)
+		print_export(data->env);
+	i = 0;
+	while (temp->argv[i] != NULL)
 	{
-		if (valid_name(cur->data) == -1)
+		if (valid_name(temp->argv[i]) == -1)
 			return (-1);
-		if (ft_strchr(cur->data, '=') != NULL)
+		if (ft_strchr(temp->argv[i], '=') != NULL)
 		{
-			if (export_exist(cur->data, data.env) == 0)
-				delete_and_add_exp(cur->data, data.env);
+			if (export_exist(temp->argv[i], data->env) == 0)
+				delete_and_add_exp(temp->argv[i], data->env);
 			else
-				add_exp(cur->data, data.env);
+				add_exp(temp->argv[i], data->env);
 		}
 		else
 		{
-			add_exp2(cur->data, data.env);
+			add_exp2(temp->argv[i], data->env);
 		}
-		cur = cur->next;
+		i++;
 	}
 	return (0);
 }

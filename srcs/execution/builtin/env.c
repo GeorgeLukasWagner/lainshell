@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 09:44:44 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/30 22:23:30 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:26:57 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,16 @@ void	ft_printenv(t_env *head)
 	}
 }
 
-int	ft_env(t_data data)
+int	ft_env(t_data *data)
 {
-	if (data.args->next)
+	t_cmd	*temp;
+
+	temp = data->cmd;
+	if (matrix_size(temp->argv) > 1)
 	{
-		if (data.args->next->token == ARG)
-		{
-			if (access(data.args->next->data, F_OK) == 0)
-				printf("env: '%s': Permission denied :(\n", data.args->next->data);
-			else
-				printf("env: '%s': No such a file or directory xD\n", data.args->next->data);
-			return (-1);
-		}
+		printf("Too many arguments\n");
+		return (-1);
 	}
-	ft_printenv(data.env);
+	ft_printenv(data->env);
 	return (0);
 }
