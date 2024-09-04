@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_util01.c                                      :+:      :+:    :+:   */
+/*   arglist01.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 19:55:22 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/22 12:53:53 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/04 11:08:20 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_args	*ft_lstnew(char *data, t_token token)
 		return (NULL);
 	new->data = data;
 	new->token = token;
+	new->append	= 0;
 	new->next = NULL;
 	return (new);
 }

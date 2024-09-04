@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 20:19:13 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/04 11:16:02 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,6 @@ int 	quotewordlen(char *line);
 void 	trim_quotes(t_args **list);
 size_t	varlen(char *data);
 int		check_env(char *data, t_env *env);
+t_cmd	*make_cmd(t_args *args);
 
 #endif

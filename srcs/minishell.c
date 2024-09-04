@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/02 19:04:21 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/04 11:10:06 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	exit_lain(t_data data)
+{
+	free_env(&data.env);
+	exit(0);
+}
 
 void	lain_loop(t_data data)
 {
@@ -20,20 +26,17 @@ void	lain_loop(t_data data)
 	{
 		lain = readline("\033[1;32mlainshell:\033[0m");
 		if (!lain)
-		{
-			free_env(&data.env);
-			exit(0);
-		}
+			exit_lain(data);
 		if (lain[0] != '\0')
 		{
 			add_history(lain);
 			data.args = split_args(lain);
 			put_vars(&data.args, data.env);
-			//heredoc here
 			if (!syntax_error(data.args))
 			{
+				//heredoc here
 				trim_quotes(&data.args);
-				ft_printlst(data.args);
+				data.cmd = make_cmd(data.args);
 				exec_built(data.args->data, data);
 			}
 			free_list(&data.args);

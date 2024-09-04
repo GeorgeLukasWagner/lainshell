@@ -6,7 +6,7 @@
 #    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/31 18:57:55 by gwagner          ###   ########.fr        #
+#    Updated: 2024/09/04 11:15:37 by gwagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ERR_DIR 		=	$(PARSE_DIR)errorcheck/
 BUILT_DIR		=	$(EXEC_DIR)builtin/
 
 MAIN_SRC		=	$(SRC_DIR)minishell.c
-ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c argor.c var2.c
+ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c argor.c var2.c make_cmd.c
 ERR_SRC			=	syntax_error.c
 EXEC_SRC		=	
 BUILT_SRC		=	pwd.c env.c export.c unset.c
