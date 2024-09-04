@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 02:21:51 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/08/31 04:12:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/03 12:20:57 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,20 +67,20 @@ static void	delete_node(char *str, t_env *env, int type)
 	free(name);
 }
 
-int	ft_unset(t_data data)
+int	ft_unset(t_data *data)
 {
-	t_args	*cur;
+	t_cmd	*temp;
+	int		i;
 
-	cur = data.args;
-	if (cur->next == NULL)
+	temp = data->cmd;
+	if (matrix_size(temp->argv) == 1)
 		return (0);
-	cur = cur->next;
-	delete_node(cur->data, data.env, 0);
-	while (cur && cur->token == ARG)
+	i = 1;
+	while (temp->argv[i] != NULL)
 	{
-		if (export_exist(cur->data, data.env) == 0)
-			delete_node(cur->data, data.env, 1);
-		cur = cur->next;
+		if (export_exist(temp->argv[i], data->env) == 0)
+			delete_node(temp->argv[i], data->env, 1);
+		i++;
 	}
 	return (0);
 }

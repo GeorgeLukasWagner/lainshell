@@ -3,10 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2024/09/04 11:15:37 by gwagner          ###   ########.fr        #
+=======
+#    Updated: 2024/09/03 13:57:19 by hzakharc         ###   ########.fr        #
+>>>>>>> refs/remotes/origin/main
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +30,7 @@ MAIN_SRC		=	$(SRC_DIR)minishell.c
 ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c argor.c var2.c make_cmd.c
 ERR_SRC			=	syntax_error.c
 EXEC_SRC		=	
-BUILT_SRC		=	pwd.c env.c export.c unset.c
+BUILT_SRC		=	pwd.c env.c export.c unset.c echo.c
 
 ARGS_SRCS		=	$(patsubst %.c,$(ARGS_DIR)%.c,$(ARGS_SRC))
 ERR_SRCS		=	$(patsubst %.c,$(ERR_DIR)%.c,$(ERR_SRC))

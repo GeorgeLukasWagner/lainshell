@@ -6,7 +6,11 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2024/09/04 11:09:42 by gwagner          ###   ########.fr       */
+=======
+/*   Updated: 2024/09/03 13:57:00 by hzakharc         ###   ########.fr       */
+>>>>>>> refs/remotes/origin/main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +50,15 @@ typedef struct s_cmd
 	char			**argv;
 	struct s_cmd	*next;
 } t_cmd;
+typedef struct s_data
+{
+	t_env	*env;
+	t_args	*args;
+	t_cmd	*cmd;
+}	t_data;
 
+
+<<<<<<< HEAD
 typedef struct s_data
 {
 	t_env	*env;
@@ -56,3 +68,7 @@ typedef struct s_data
 
 
 #endif
+=======
+#endif
+//i will go insane soon
+>>>>>>> refs/remotes/origin/main
