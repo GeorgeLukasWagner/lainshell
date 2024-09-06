@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/04 11:16:02 by gwagner          ###   ########.fr       */
-=======
-/*   Updated: 2024/09/03 12:28:03 by hzakharc         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/09/06 16:18:40 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +54,6 @@ int 	quotewordlen(char *line);
 void 	trim_quotes(t_args **list);
 size_t	varlen(char *data);
 int		check_env(char *data, t_env *env);
-<<<<<<< HEAD
 t_cmd	*make_cmd(t_args *args);
-=======
-int		matrix_size(char **matrix);
-int		ft_echo(t_cmd *cmd);
->>>>>>> refs/remotes/origin/main
 
 #endif

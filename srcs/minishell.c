@@ -6,11 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/04 11:10:06 by gwagner          ###   ########.fr       */
-=======
-/*   Updated: 2024/09/03 13:56:46 by hzakharc         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/09/06 16:19:04 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +36,8 @@ void	lain_loop(t_data data)
 			{
 				//heredoc here
 				trim_quotes(&data.args);
-<<<<<<< HEAD
 				data.cmd = make_cmd(data.args);
-				exec_built(data.args->data, data);
-=======
-				ft_printlst(data.args);
-				exec_built(data.args->data, &data);
->>>>>>> refs/remotes/origin/main
+				// exec_built(data.args->data, data);
 			}
 			free_list(&data.args);
 			free(lain);

@@ -3,14 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
+#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2024/09/04 11:15:37 by gwagner          ###   ########.fr        #
-=======
-#    Updated: 2024/09/03 13:57:19 by hzakharc         ###   ########.fr        #
->>>>>>> refs/remotes/origin/main
+#    Updated: 2024/09/06 16:18:15 by gwagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
