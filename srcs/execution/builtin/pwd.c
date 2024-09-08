@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/03 13:58:29 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/05 09:51:50 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	exec_built(char *cmd, t_data *data)
 		return (ft_env(data));
 	// if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
 	// 	//coming soon^^
-	return (-1);
+	return (-1);	
 }
 
 int	matrix_size(char **matrix)
