@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/04 16:16:44 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/08 14:33:50 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ typedef struct s_cmd
 	char			**argv;
 	struct s_cmd	*next;
 } t_cmd;
+
 typedef struct s_data
 {
 	t_env	*env;
 	t_args	*args;
 	t_cmd	*cmd;
 }	t_data;
-
 
 #endif
 //i will go insane soon
