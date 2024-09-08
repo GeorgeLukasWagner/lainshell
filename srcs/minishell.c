@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/08 14:35:57 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:42:32 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	lain_loop(t_data data)
 				exec_built(data.args->data, &data);
 			}
 			free_list(&data.args);
+			free_cmd(data.cmd);
 			free(lain);
 		}
 	}
