@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/04 11:10:06 by gwagner          ###   ########.fr       */
-=======
-/*   Updated: 2024/09/03 13:56:46 by hzakharc         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/09/08 14:23:34 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +36,8 @@ void	lain_loop(t_data data)
 			{
 				//heredoc here
 				trim_quotes(&data.args);
-<<<<<<< HEAD
-				data.cmd = make_cmd(data.args);
-				exec_built(data.args->data, data);
-=======
 				ft_printlst(data.args);
-				exec_built(data.args->data, &data);
->>>>>>> refs/remotes/origin/main
+				// exec_built(data.args->data, &data);
 			}
 			free_list(&data.args);
 			free(lain);
@@ -75,13 +66,33 @@ void	init_signal(void)
 	signal(SIGQUIT, signal_handler);
 }
 
-int	main(int ac, char **av, char **envp)
-{
-	t_data	data;
+// int	main(int ac, char **av, char **envp)
+// {
+// 	t_data	data;
 
+// 	(void)ac;
+// 	(void)av;
+// 	data.env = init_env(envp);
+// 	init_signal();
+// 	lain_loop(data);
+// }
+
+int main(int ac, char **av, char **envp)
+{
+	char **args;
+	t_data data;
 	(void)ac;
 	(void)av;
+	
 	data.env = init_env(envp);
-	init_signal();
-	lain_loop(data);
+	args = malloc(sizeof(char *) * 4);
+	args[0] = ft_strdup("hih");
+	args[1] = ft_strdup("something");
+	args[2] = ft_strdup("hihi");
+	args[3] = NULL;
+	pathfinder(data.env, args);
+	printf("%s\n", args[0]);
+	free_env(&data.env);
+	free_matrix(args);
+	return (0);
 }

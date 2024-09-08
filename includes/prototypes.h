@@ -6,11 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2024/09/04 11:16:02 by gwagner          ###   ########.fr       */
-=======
-/*   Updated: 2024/09/03 12:28:03 by hzakharc         ###   ########.fr       */
->>>>>>> refs/remotes/origin/main
+/*   Updated: 2024/09/07 21:50:11 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +54,9 @@ int 	quotewordlen(char *line);
 void 	trim_quotes(t_args **list);
 size_t	varlen(char *data);
 int		check_env(char *data, t_env *env);
-<<<<<<< HEAD
 t_cmd	*make_cmd(t_args *args);
-=======
 int		matrix_size(char **matrix);
 int		ft_echo(t_cmd *cmd);
->>>>>>> refs/remotes/origin/main
+void	pathfinder(t_env *env, char **args);
 
 #endif
