@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:20:06 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/04 14:02:24 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/08 18:56:42 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,6 @@ t_cmd	*make_cmd(t_args *args)
 			tmp = tmp->next;
 		ft_free(argv);
 	}
-	ft_printcmd(cmd);
+	//ft_printcmd(cmd);
 	return (cmd);
 }

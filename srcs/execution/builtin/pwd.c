@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/05 09:51:50 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:15:10 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,13 +88,13 @@ static int	ft_cd_util(t_data *data)
 	temp = data->cmd;
 	if (matrix_size(temp->argv) >= 3)
 	{
-		printf("cd: too many arguments\n");
-		return (-1);
+		put_error((char *[]){"cd: Too many arguments\n", NULL});
+		return (1);
 	}
 	if (chdir(temp->argv[1]) != 0)
 	{
-		printf("cd: %s: No such directory\n", temp->argv[1]);
-		return (-1);
+		put_error((char *[]){"cd: ", temp->argv[1], ": No such file or directory\n", NULL});
+		return (1);
 	}
 	else
 	{

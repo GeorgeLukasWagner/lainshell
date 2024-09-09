@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/08 16:42:32 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:32:03 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	lain_loop(t_data data)
 				//heredoc here
 				trim_quotes(&data.args);
 				data.cmd = make_cmd(data.args);
-				exec_built(data.args->data, &data);
+				execute_cmd(&data, data.cmd);
+				free_cmd(data.cmd);
 			}
 			free_list(&data.args);
-			free_cmd(data.cmd);
 			free(lain);
 		}
 	}
@@ -80,20 +80,10 @@ int	main(int ac, char **av, char **envp)
 
 // int main(int ac, char **av, char **envp)
 // {
-// 	char **args;
-// 	t_data data;
 // 	(void)ac;
 // 	(void)av;
 	
-// 	data.env = init_env(envp);
-// 	args = malloc(sizeof(char *) * 4);
-// 	args[0] = ft_strdup("hih");
-// 	args[1] = ft_strdup("something");
-// 	args[2] = ft_strdup("hihi");
-// 	args[3] = NULL;
-// 	pathfinder(data.env, args);
-// 	printf("%s\n", args[0]);
-// 	free_env(&data.env);
-// 	free_matrix(args);
+// 	for (int i = 0; envp[i]; i++)
+// 		printf("%s\n", envp[i]);
 // 	return (0);
 // }

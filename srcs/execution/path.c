@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.c                                        :+:      :+:    :+:   */
+/*   path.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:37:58 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/08 14:22:16 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/08 16:44:46 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-void	pathfinder_util(char **to_find, char **args)
+static void	pathfinder_util(char **to_find, char **args)
 {
 	char	*temp1;
 	char	*temp2;

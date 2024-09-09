@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:18:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/03 12:17:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/08 18:52:41 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	free_matrix(char **str)
 	i = 0;
 	if (str)
 	{
-		while (str[i])
+		while (str[i] != NULL)
 		{
 			free(str[i]);
 			i++;

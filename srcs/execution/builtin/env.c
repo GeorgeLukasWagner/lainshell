@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 09:44:44 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/03 12:26:57 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/09 16:16:37 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ int	ft_env(t_data *data)
 	temp = data->cmd;
 	if (matrix_size(temp->argv) > 1)
 	{
-		printf("Too many arguments\n");
-		return (-1);
+		put_error((char *[]){"env: '", temp->argv[1], "':", "No such a file or directory\n", NULL});
+		return (127);
 	}
 	ft_printenv(data->env);
 	return (0);
