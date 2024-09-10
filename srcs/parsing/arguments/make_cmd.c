@@ -143,7 +143,8 @@ char	**make_argv(t_args **args)
 			argv[i] = tmp;
 			(*args) = (*args)->next;
 		}
-		i++;
+		if ((*args)->token < 4)
+			i++;
 		(*args) = (*args)->next;
 	}
 	return (argv);
