@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/09 15:58:44 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:12:04 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ void	pathfinder(t_env *env, char **args);
 void	free_cmd(t_cmd *cmd);
 void	execute_cmd(t_data *data, t_cmd *cmd);
 void	put_error(char **msg);
+void	ft_printcmd(t_cmd *cmd);
+void	execute(t_data *data, t_cmd *cmd);
 
 #endif

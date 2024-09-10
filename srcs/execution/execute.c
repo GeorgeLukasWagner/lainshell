@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/09 13:06:55 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/10 16:18:49 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,34 @@ void	execute_cmd(t_data *data, t_cmd *cmd)
 	else
 	{
 		pathfinder(data->env, cmd->argv);
-		execve(cmd->argv[0], cmd->argv, envp);
+		if (execve(cmd->argv[0], cmd->argv, envp) == -1)
+		{
+			put_error((char*[]){cmd->argv[0], ": No such file or directory\n"});
+			free_matrix(envp);
+			exit(1);
+		}
 	}
 	free_matrix(envp);
+}
+
+void	execute(t_data *data, t_cmd *cmd)
+{
+	pid_t	pid;
+
+	if (cmd->next == NULL)
+	{
+		pid = fork();
+		if (pid == -1)
+			perror("fork");
+		else if (pid == 0)
+		{
+			//handle_redir;
+			execute_cmd(data, cmd);
+		}
+		waitpid(pid, 0, 0);
+	}
+	else
+	{
+		//execute_pipeline();
+	}
 }
