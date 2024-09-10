@@ -130,7 +130,7 @@ char	**make_argv(t_args **args)
 	char	*tmp;
 	size_t	i;
 
-	argv = malloc(sizeof(char *) * (cmd_len((*args)) + 1));
+	argv = ft_calloc(sizeof(char *), (cmd_len((*args)) + 1));
 	i = 0;
 	while ((*args) && (*args)->token != PIPE)
 	{
@@ -146,7 +146,6 @@ char	**make_argv(t_args **args)
 		i++;
 		(*args) = (*args)->next;
 	}
-	argv[i] = NULL;
 	return (argv);
 }
 
@@ -168,13 +167,11 @@ t_cmd	*make_cmd(t_args *args)
 	t_cmd	*cmd;
 	t_args	*tmp;
 	char	**argv;
-	size_t	i;
 
 	tmp = args;
 	cmd = NULL;
 	while (tmp)
 	{
-		i = 0;
 		argv = make_argv(&tmp);
 		ft_cmdadd_back(&cmd, ft_cmdnew(argv, cmd_len(args) + 1));
 		if (tmp && tmp->next)
