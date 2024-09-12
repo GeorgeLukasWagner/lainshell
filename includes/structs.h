@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/09 16:28:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:54:39 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@ typedef enum e_token
 	REDIR_APPEND
 }		t_token;
 
+typedef enum e_redir_type
+{
+	IN,
+	OUT,
+	APPEND,
+	HERE_DOC
+}		t_redir_type;
+
 typedef struct s_args
 {
 	char			*data;
@@ -41,11 +49,18 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+typedef struct s_redir
+{
+	t_redir_type	type;
+	char			*name;
+	struct s_redir	*next;
+}	t_redir;
+
 typedef struct s_cmd
 {
 	char			**argv;
 	struct s_cmd	*next;
-} t_cmd;
+}	t_cmd;
 
 typedef struct s_data
 {

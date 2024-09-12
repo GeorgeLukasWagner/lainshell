@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/10 16:18:49 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/12 16:43:51 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,28 +49,31 @@ char	**create_envp(t_env *env)
 	return (envp);
 }
 
+int	is_a_built(char **argv)
+{
+	if ((ft_strncmp(argv[0], "echo", ft_strlen(argv[0])) == 0)
+		|| (ft_strncmp(argv[0], "cd", ft_strlen(argv[0])) == 0)
+		|| (ft_strncmp(argv[0], "pwd", ft_strlen(argv[0])) == 0)
+		|| (ft_strncmp(argv[0], "export", ft_strlen(argv[0])) == 0)
+		|| (ft_strncmp(argv[0], "unset", ft_strlen(argv[0])) == 0)
+		|| (ft_strncmp(argv[0], "env", ft_strlen(argv[0])) == 0)
+		|| (ft_strncmp(argv[0], "exit", ft_strlen(argv[0])) == 0))
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
 void	execute_cmd(t_data *data, t_cmd *cmd)
 {
-	char **envp;
+	char	**envp;
 
 	envp = create_envp(data->env);
-	if ((ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])) == 0)
-		|| (ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])) == 0)
-		|| (ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])) == 0)
-		|| (ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) == 0)
-		|| (ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])) == 0)
-		|| (ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])) == 0)
-		|| (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0))
-		exec_built(cmd->argv[0], data);
-	else
+	pathfinder(data->env, cmd->argv);
+	if (execve(cmd->argv[0], cmd->argv, envp) == -1)
 	{
-		pathfinder(data->env, cmd->argv);
-		if (execve(cmd->argv[0], cmd->argv, envp) == -1)
-		{
-			put_error((char*[]){cmd->argv[0], ": No such file or directory\n"});
-			free_matrix(envp);
-			exit(1);
-		}
+		put_error((char*[]){cmd->argv[0], ": No such file or directory\n", NULL});
+		free_matrix(envp);
+		return ;
 	}
 	free_matrix(envp);
 }
@@ -81,15 +84,20 @@ void	execute(t_data *data, t_cmd *cmd)
 
 	if (cmd->next == NULL)
 	{
-		pid = fork();
-		if (pid == -1)
-			perror("fork");
-		else if (pid == 0)
+		if (is_a_built(cmd->argv) == TRUE)
+			exec_built(cmd->argv[0], data);
+		else
 		{
-			//handle_redir;
-			execute_cmd(data, cmd);
+			pid = fork();
+			if (pid == -1)
+				perror("fork");
+			else if (pid == 0)
+			{
+				//handle_redir;
+				execute_cmd(data, cmd);
+			}
+			waitpid(pid, 0, 0);
 		}
-		waitpid(pid, 0, 0);
 	}
 	else
 	{

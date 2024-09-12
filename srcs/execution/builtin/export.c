@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:18:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/08 18:52:41 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/10 18:19:42 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int	ft_export(t_data *data)
 	temp = data->cmd;
 	if (matrix_size(temp->argv) == 1)
 		print_export(data->env);
-	i = 0;
+	i = 1;
 	while (temp->argv[i] != NULL)
 	{
 		if (valid_name(temp->argv[i]) == -1)
