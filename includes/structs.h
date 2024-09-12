@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/12 17:55:40 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/12 19:01:35 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,13 @@ typedef struct s_redir
 {
 	t_redir_type	type;
 	char			*name;
+	struct s_redir	*next;
 }	t_redir;
 
 typedef struct s_cmd
 {
 	char			**argv;
-	struct s_redir	*next;
+	t_redir			*redir;
 	struct s_cmd	*next;
 }	t_cmd;
 
