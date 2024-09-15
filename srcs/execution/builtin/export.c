@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:18:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/10 18:19:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:54:01 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,12 +173,12 @@ static void	add_exp2(char *str, t_env *env)
 	}
 }
 
-int	ft_export(t_data *data)
+int	ft_export(t_data *data, t_cmd *cmd)
 {
 	t_cmd	*temp;
 	int		i;
 
-	temp = data->cmd;
+	temp = cmd;
 	if (matrix_size(temp->argv) == 1)
 		print_export(data->env);
 	i = 1;

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/12 16:43:51 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/15 04:01:31 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	execute(t_data *data, t_cmd *cmd)
 	if (cmd->next == NULL)
 	{
 		if (is_a_built(cmd->argv) == TRUE)
-			exec_built(cmd->argv[0], data);
+			exec_built(cmd, data);
 		else
 		{
 			pid = fork();
@@ -93,7 +93,8 @@ void	execute(t_data *data, t_cmd *cmd)
 				perror("fork");
 			else if (pid == 0)
 			{
-				//handle_redir;
+				// if (cmd->redir)
+				// 	handle_redir(cmd->redir);
 				execute_cmd(data, cmd);
 			}
 			waitpid(pid, 0, 0);

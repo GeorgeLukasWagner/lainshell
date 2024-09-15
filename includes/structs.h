@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/12 19:01:35 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:19:14 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_redir_type
 	IN,
 	OUT,
 	APPEND,
-	HERE_DOC
+	HEREDOC
 }		t_redir_type;
 
 typedef struct s_args

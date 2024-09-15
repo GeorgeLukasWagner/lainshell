@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/12 14:04:55 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/15 03:57:06 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ void	free_env(t_env **list);
 t_env	*init_env(char **envp);
 void	put_vars(t_args **list, t_env *env);
 int 	ft_pwd(t_data *data);
-int		ft_cd(t_data *data);
-int 	ft_env(t_data *data);
-int 	exec_built(char *cmd, t_data *data);
+int		ft_cd(t_data *data, t_cmd *cmd);
+int 	ft_env(t_data *data, t_cmd *cmd);
+int 	exec_built(t_cmd *cmd, t_data *data);
 void	ft_printenv(t_env *head);
 t_env	*find_node(const char *to_find, t_env *env);
-int		ft_export(t_data *data);
+int		ft_export(t_data *data, t_cmd *cmd);
 void	free_matrix(char **str);
 int		export_exist(char *data, t_env *env);
-int		ft_unset(t_data *data);
+int		ft_unset(t_data *data, t_cmd *cmd);
 int 	quotewordlen(char *line);
 void 	trim_quotes(t_args **list);
 size_t	varlen(char *data);
@@ -63,5 +63,7 @@ void	execute_cmd(t_data *data, t_cmd *cmd);
 void	put_error(char **msg);
 void	ft_printcmd(t_cmd *cmd);
 void	execute(t_data *data, t_cmd *cmd);
+void	handle_redir(t_redir *redir);
+void	exec_built_redir(t_data *data, t_cmd *cmd);
 
 #endif
