@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 15:38:16 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 15:54:13 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	lain_loop(t_data data)
 
 	while (1)
 	{
-		lain = readline("\033[1;32mlainshell:\033[0m");
+		lain = readline("\033[1;32mlainshell:\033[0m ");
 		if (!lain)
 			exit_lain(data);
 		if (lain[0] != '\0')
