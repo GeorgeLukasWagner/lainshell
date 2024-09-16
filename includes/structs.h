@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/13 18:19:14 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:51:54 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,14 @@ typedef struct s_env
 	char			*data;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct s_alt
+{
+	char			*data;
+	t_token			token;
+	int				index;
+	struct s_alt	*next;
+}	t_alt;
 
 typedef struct s_redir
 {

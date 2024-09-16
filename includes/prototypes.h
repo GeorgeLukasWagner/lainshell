@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 12:40:23 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:48:08 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ void	execute_cmd(t_data *data, t_cmd *cmd);
 void	put_error(char **msg);
 void	ft_printcmd(t_cmd *cmd);
 void	execute(t_data *data, t_cmd *cmd);
+size_t	varlen(char *data);
 void	handle_redir(t_redir *redir);
 void	exec_built_redir(t_data *data, t_cmd *cmd);
 

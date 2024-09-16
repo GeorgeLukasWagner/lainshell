@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:34:48 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/02 15:10:31 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:33:28 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,19 @@ int	putcmd(t_args **list, char *line, int *i)
 {
 	t_args	*new;
 	char	*cmd;
-	
-	cmd = ft_substr(line, *i, quotewordlen(line + *i));
+
+	if (line[*i] == '"' || line[*i] == '\'')
+		cmd = ft_substr(line, *i, wordlen(line + *i));
+	else
+		cmd = ft_substr(line, *i, varlen(line + *i));
 	new = ft_lstnew(cmd, CMD);
+	if (!is_space(line[varlen(line + *i) + 1]) && line[*i] != '\"' && line[*i] != '\'')
+		new->append = true;
 	ft_lstadd_back(list, new);
-	*i += quotewordlen(line + *i);
+	if (line[*i] == '"' || line[*i] == '\'')
+		*i += wordlen(line + *i);
+	else
+		*i += varlen(line + *i);
 	return (0);
 }
 

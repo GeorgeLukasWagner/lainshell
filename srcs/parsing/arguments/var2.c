@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:56:31 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 18:56:39 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/13 21:59:48 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ size_t	varlen(char *data)
 	size_t	i;
 
 	i = 0;
-	while (data[i] && data[i] != '\"' && data[i] != ' ')
+	while (data[i] && data[i] != '\"' && data[i] != ' ' && data[i] != '\'')
 		i++;
 	return (i);
 }
