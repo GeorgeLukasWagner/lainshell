@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/12 14:04:55 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 10:55:59 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void	execute_cmd(t_data *data, t_cmd *cmd);
 void	put_error(char **msg);
 void	ft_printcmd(t_cmd *cmd);
 void	execute(t_data *data, t_cmd *cmd);
+size_t	varlen(char *data);
 
 #endif

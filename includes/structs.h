@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/12 19:01:35 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:44:57 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef enum e_redir_type
 	IN,
 	OUT,
 	APPEND,
-	HERE_DOC
+	HEREDOC
 }		t_redir_type;
 
 typedef struct s_args
@@ -48,6 +48,14 @@ typedef struct s_env
 	char			*data;
 	struct s_env	*next;
 }	t_env;
+
+typedef struct s_alt
+{
+	char			*data;
+	t_token			token;
+	int				index;
+	struct s_alt	*next;
+}	t_alt;
 
 typedef struct s_redir
 {

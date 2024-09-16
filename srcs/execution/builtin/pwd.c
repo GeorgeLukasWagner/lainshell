@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/10 18:30:01 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/13 18:27:48 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ static int	ft_cd_util(t_data *data)
 	}
 	if (chdir(temp->argv[1]) != 0)
 	{
+		perror("cd");
 		put_error((char *[]){"cd: ", temp->argv[1], ": No such file or directory\n", NULL});
 		return (1);
 	}

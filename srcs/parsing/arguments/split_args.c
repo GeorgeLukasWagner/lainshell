@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:44:07 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/25 15:35:21 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 11:49:15 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,18 @@ int	putarg(t_args **list, char *line, int i)
 	t_args	*new;
 	char	*arg;
 
-	arg = ft_substr(line, i, wordlen(line + i));
+	if (line[i] == '"' || line[i] == '\'')
+		arg = ft_substr(line, i, wordlen(line + i));
+	else
+		arg = ft_substr(line, i, varlen(line + i));
 	new = ft_lstnew(arg, ARG);
+	if (!is_space(line[varlen(line + i) + 1]) && line[i] != '\"' && line[i] != '\'')
+		new->append = true;
 	ft_lstadd_back(list, new);
-	i += wordlen(line + i);
+	if (line[i] == '"' || line[i] == '\'')
+		i += wordlen(line + i);
+	else
+		i += varlen(line + i);
 	return (i);
 }
 
@@ -91,11 +99,11 @@ t_args	*split_args(char *line)
 			i = putredir(&list, line, i, &cmd);
 		else if (line[i] == '|')
 			cmd = putpipe(&list, &i);
-		else if (cmd)
-			cmd = putcmd(&list, line, &i);
 		else if ((line[i] == '"' || line[i] == '\'')
 			&& quotecheck(line, i, line[i]))
 			i = putquote(&list, line, i, line[i]);
+		else if (cmd)
+			cmd = putcmd(&list, line, &i);
 		else if (line[i])
 			i = putarg(&list, line, i);
 	}
