@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/24 09:44:44 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/09 16:16:37 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/14 22:55:04 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	ft_printenv(t_env *head)
 	}
 }
 
-int	ft_env(t_data *data)
+int	ft_env(t_data *data, t_cmd *cmd)
 {
 	t_cmd	*temp;
 
-	temp = data->cmd;
+	temp = cmd;
 	if (matrix_size(temp->argv) > 1)
 	{
 		put_error((char *[]){"env: '", temp->argv[1], "':", "No such a file or directory\n", NULL});

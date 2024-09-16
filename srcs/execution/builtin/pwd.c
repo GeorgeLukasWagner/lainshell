@@ -3,29 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/13 18:27:48 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 12:54:18 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-int	exec_built(char *cmd, t_data *data)
+int	exec_built(t_cmd *cmd, t_data *data)
 {
-	if (ft_strncmp(cmd, "echo", ft_strlen(cmd)) == 0)
-		return (ft_echo(data->cmd));
-	if (ft_strncmp(cmd, "cd", ft_strlen(cmd)) == 0)
-		return (ft_cd(data));
-	if (ft_strncmp(cmd, "pwd", ft_strlen(cmd)) == 0)
+	if (ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])) == 0)
+		return (ft_echo(cmd));
+	if (ft_strncmp(cmd->argv[0], "cd", ft_strlen(cmd->argv[0])) == 0)
+		return (ft_cd(data, cmd));
+	if (ft_strncmp(cmd->argv[0], "pwd", ft_strlen(cmd->argv[0])) == 0)
 		return (ft_pwd(data));
-	if (ft_strncmp(cmd, "export", ft_strlen(cmd)) == 0)
-		return (ft_export(data));
-	if (ft_strncmp(cmd, "unset", ft_strlen(cmd)) == 0)
-		return (ft_unset(data));
-	if (ft_strncmp(cmd, "env", ft_strlen(cmd)) == 0)
-		return (ft_env(data));
+	if (ft_strncmp(cmd->argv[0], "export", ft_strlen(cmd->argv[0])) == 0)
+		return (ft_export(data, cmd));
+	if (ft_strncmp(cmd->argv[0], "unset", ft_strlen(cmd->argv[0])) == 0)
+		return (ft_unset(data, cmd));
+	if (ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])) == 0)
+		return (ft_env(data, cmd));
 	// if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
 	// 	//coming soon^^
 	return (-1);	
@@ -51,77 +51,6 @@ int	ft_pwd(t_data *data)
 	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
-}
-
-static void	change_dir_env(t_env **env)
-{
-	t_env	*pwd;
-	t_env	*oldpwd;
-	char	*s_pwd;
-
-	pwd = find_node("PWD=", *env);
-	oldpwd = find_node("OLDPWD=", *env);
-	if (pwd == NULL || oldpwd == NULL)
-		return ;
-	free(oldpwd->data);
-	oldpwd->data = ft_strjoin("OLDPWD=", pwd->data + 4);
-	free(pwd->data);
-	s_pwd = getcwd(NULL, 0);
-	pwd->data = ft_strjoin("PWD=", s_pwd);
-	free(s_pwd);
-}
-
-static char	*find_home(t_data *data)
-{
-	t_env	*home;
-
-	home = find_node("HOME=", data->env);
-	if (home == NULL)
-		return (NULL);
-	return (ft_substr(home->data, 5, ft_strlen(home->data) - 5));
-}
-
-static int	ft_cd_util(t_data *data)
-{
-	t_cmd	*temp;
-
-	temp = data->cmd;
-	if (matrix_size(temp->argv) >= 3)
-	{
-		put_error((char *[]){"cd: Too many arguments\n", NULL});
-		return (1);
-	}
-	if (chdir(temp->argv[1]) != 0)
-	{
-		perror("cd");
-		put_error((char *[]){"cd: ", temp->argv[1], ": No such file or directory\n", NULL});
-		return (1);
-	}
-	else
-	{
-		change_dir_env(&data->env);
-		return (0);
-	}
-}
-
-int		ft_cd(t_data *data)
-{
-	t_cmd	*temp;
-	char	*home;
-
-	temp = data->cmd;
-	if (matrix_size(temp->argv) == 1)
-	{
-		home = find_home(data);
-		if (home)
-		{
-			chdir(home);
-			change_dir_env(&data->env);
-			free(home);
-			return (0);
-		}
-	}
-	return (ft_cd_util(data));
 }
 
 t_env	*find_node(const char *to_find, t_env *env)

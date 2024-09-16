@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 15:54:13 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 15:58:51 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,12 +78,3 @@ int	main(int ac, char **av, char **envp)
 	lain_loop(data);
 }
 
-// int main(int ac, char **av, char **envp)
-// {
-// 	(void)ac;
-// 	(void)av;
-	
-// 	for (int i = 0; envp[i]; i++)
-// 		printf("%s\n", envp[i]);
-// 	return (0);
-// }
