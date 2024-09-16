@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:44:07 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 11:49:15 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 15:37:20 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,13 @@ int	putarg(t_args **list, char *line, int i)
 	else
 		arg = ft_substr(line, i, varlen(line + i));
 	new = ft_lstnew(arg, ARG);
-	if (!is_space(line[varlen(line + i) + 1]) && line[i] != '\"' && line[i] != '\'')
-		new->append = true;
 	ft_lstadd_back(list, new);
 	if (line[i] == '"' || line[i] == '\'')
 		i += wordlen(line + i);
 	else
 		i += varlen(line + i);
+	if (!is_space(line[i]))
+		new->append = true;
 	return (i);
 }
 
