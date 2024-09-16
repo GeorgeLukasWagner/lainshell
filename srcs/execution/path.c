@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:37:58 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/08 16:44:46 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:39:49 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,15 @@ static void	return_path(char *path, char **args)
 	}
 }
 
-void	pathfinder(t_env *env, char **args)
+int	pathfinder(t_env *env, char **args)
 {
 	char	*path = NULL;
 	char	**to_find;
 	t_env	*src;
 	int		i;
 
+	if (access(args[0], X_OK) == 0)
+		return (TRUE);				//ERROR if there is PATH env variable is unset (have to change it probably)
 	src = find_node("PATH=", env);
 	to_find = ft_split(src->data, ':');
 	pathfinder_util(to_find, args);
@@ -71,4 +73,7 @@ void	pathfinder(t_env *env, char **args)
 	}
 	free_matrix(to_find);
 	return_path(path, args);
+	if (access(args[0], X_OK) == 0)
+		return (TRUE);
+	return (FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/15 03:57:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 12:40:23 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		check_env(char *data, t_env *env);
 t_cmd	*make_cmd(t_args *args);
 int		matrix_size(char **matrix);
 int		ft_echo(t_cmd *cmd);
-void	pathfinder(t_env *env, char **args);
+int		pathfinder(t_env *env, char **args);
 void	free_cmd(t_cmd *cmd);
 void	execute_cmd(t_data *data, t_cmd *cmd);
 void	put_error(char **msg);
