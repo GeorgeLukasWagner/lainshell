@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:48:27 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/08 18:41:16 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:25:54 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_echo(t_cmd *cmd)
 	
 	i = 1;
 	nl = FALSE;
-	if (cmd->argv[1] == NULL)
+	if (cmd->argv[1] == NULL || cmd->argv[1][0] == '\0')
 	{
 		printf("\n");
 		return (0);

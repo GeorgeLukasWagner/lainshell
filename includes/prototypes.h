@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/17 15:41:44 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:11:38 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,7 @@ void	ft_free(char **argv);
 t_alt	*get_redir(t_args **args);
 void	free_alt(t_alt **list);
 void	print_redir(t_alt *redir);
+void	execute_pipeline(t_data *data, t_cmd *cmd);
+void	exec(t_data *data);
 
 #endif

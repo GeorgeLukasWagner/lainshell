@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/17 14:40:22 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/19 17:11:25 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_cmd
 	char			**argv;
 	t_redir			*redir;
 	struct s_cmd	*next;
+	int				pid;
 }	t_cmd;
 
 typedef struct s_data

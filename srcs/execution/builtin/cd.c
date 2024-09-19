@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 22:48:01 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/15 03:58:26 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:54:33 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,15 @@ static int	change_dir(char *dir, t_data *data)
 	home = find_node("HOME=", data->env);
 	if (dir == NULL)
 	{
-		home_dir = ft_substr(home->data, 4, ft_strlen(home->data));
+		home_dir = ft_substr(home->data, 5, ft_strlen(home->data));
 		if (chdir(home_dir) == -1)
 		{
-			free(home_dir);
 			put_error((char *[]){"cd: ", home_dir, "is not a directory\n"});
+			free(home_dir);
 			return (1);
 		}
 		free(home_dir);
+		return (0);
 	}
 	if (chdir(dir) == -1)
 	{
