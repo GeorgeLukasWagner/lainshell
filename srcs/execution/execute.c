@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/17 15:45:25 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/19 13:19:13 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ void	execute_cmd(t_data *data, t_cmd *cmd)
 
 void	execute(t_data *data, t_cmd *cmd)
 {
+	pid_t	pid;
+
 	if (cmd->next == NULL)
 	{
 		if (is_a_built(cmd->argv) == TRUE)
@@ -87,16 +89,16 @@ void	execute(t_data *data, t_cmd *cmd)
 		{
 			if (pathfinder(data->env, cmd->argv) == TRUE)
 			{
-				cmd->pid = fork();
-				if (cmd->pid == -1)
+				pid = fork();
+				if (pid == -1)
 					perror("fork");
-				else if (cmd->pid == 0)
+				else if (pid == 0)
 				{
-					if (cmd->redir)
-						handle_redir(cmd->redir);
+					// if (cmd->redir)
+					// 	handle_redir(cmd->redir);			//handle redirections somehow
 					execute_cmd(data, cmd);
 				}
-				waitpid(cmd->pid, 0, 0);
+				waitpid(pid, NULL, 0);
 			}
 			else
 				put_error((char*[]){cmd->argv[0], ": Command was not found\n", NULL});

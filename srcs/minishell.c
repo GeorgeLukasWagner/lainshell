@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 15:58:51 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/19 13:04:35 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	lain_loop(t_data data)
 				//heredoc here
 				trim_quotes(&data.args);
 				data.cmd = make_cmd(data.args);
-				execute(&data, data.cmd);
+				exec(&data);
 				free_cmd(data.cmd);
 			}
 			free_list(&data.args);
