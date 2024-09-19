@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 12:48:08 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/17 15:41:44 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,12 @@ void	execute(t_data *data, t_cmd *cmd);
 size_t	varlen(char *data);
 void	handle_redir(t_redir *redir);
 void	exec_built_redir(t_data *data, t_cmd *cmd);
+size_t	special_len(char *str);
+int		is_token(char c);
+void	clean_cmd(t_cmd **cmd);
+void	ft_free(char **argv);
+t_alt	*get_redir(t_args **args);
+void	free_alt(t_alt **list);
+void	print_redir(t_alt *redir);
 
 #endif

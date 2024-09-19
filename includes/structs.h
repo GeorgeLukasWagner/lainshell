@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 12:51:54 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/17 14:40:22 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_alt
 
 typedef struct s_redir
 {
-	t_redir_type	type;
+	t_token			type;
 	char			*name;
 	struct s_redir	*next;
 }	t_redir;
@@ -76,6 +76,7 @@ typedef struct s_data
 	t_env	*env;
 	t_args	*args;
 	t_cmd	*cmd;
+	t_alt	*redir;
 }	t_data;
 
 #endif

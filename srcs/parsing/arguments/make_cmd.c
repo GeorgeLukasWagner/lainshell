@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:20:06 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/08 18:56:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/16 20:52:23 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -6,18 +6,25 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 18:56:31 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/13 21:59:48 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 20:45:13 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "args.h"
+
+int	is_special(char c)
+{
+	if (c == '\\' || c == '/' || c == '!')
+		return (1);
+	return (0);
+}
 
 size_t	varlen(char *data)
 {
 	size_t	i;
 
 	i = 0;
-	while (data[i] && data[i] != '\"' && data[i] != ' ' && data[i] != '\'')
+	while (data[i] && data[i] != '\"' && data[i] != ' ' && data[i] != '\'' && !is_special(data[i]))
 		i++;
 	return (i);
 }
