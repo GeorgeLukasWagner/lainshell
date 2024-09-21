@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:18:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/14 22:54:01 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:18:08 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,9 +194,7 @@ int	ft_export(t_data *data, t_cmd *cmd)
 				add_exp(temp->argv[i], data->env);
 		}
 		else
-		{
 			add_exp2(temp->argv[i], data->env);
-		}
 		i++;
 	}
 	return (0);

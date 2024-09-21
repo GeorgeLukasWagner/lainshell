@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/21 14:20:14 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/21 18:10:38 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,51 +72,25 @@ static void	heredoc_redir(void)
 	close(fd);
 }
 
-int	handle_redir(t_alt **redir, int index)
+void	handle_redir(t_alt **redir, int index)
 {
 	t_alt	*temp;
-	int		flag;
 
 	temp = *redir;
-	flag = TRUE;
 	while (temp && temp->index != index)
 		temp = temp->next;
 	while (temp && temp->index == index)	
 	{
 		if (temp->token == REDIR_IN)
-		{
-			printf("im false\n");
-			if (temp->exec == FALSE)
-			{
-				flag = FALSE;
-			}
-			else
-				in_redir(temp->data);
-		}
+			in_redir(temp->data);
 		if (temp->token == REDIR_OUT)
-		{
-			if (temp->exec == FALSE)
-				flag = FALSE;
-			else
-				out_redir(temp->data);
-		}
+			out_redir(temp->data);
 		if (temp->token == REDIR_APPEND)
-		{
-			if (temp->exec == FALSE)
-				flag = FALSE;
-			else
-				append_redir(temp->data);
-		}
+			append_redir(temp->data);
 		if (temp->token == HERE_DOC)
-		{
-			if (temp->exec == FALSE)
-				flag = FALSE;
-			else
-				heredoc_redir();
-		}
+			heredoc_redir();
 		temp = temp->next;
 	}
-	return (flag);
 }
 
 void	exec_built_redir(t_data *data, t_cmd *cmd, int index)
@@ -132,20 +106,18 @@ void	exec_built_redir(t_data *data, t_cmd *cmd, int index)
 			temp = temp->next;
 		if (temp != NULL)
 		{
+			if (data->redir)
+				if (check_redir_exec(data->redir, index) == FALSE)
+					return ;
 			in_copy = dup(0);
 			out_copy = dup(1);
-			if (handle_redir(&data->redir, index) == FALSE)
-			{
-				close(in_copy);
-				close(out_copy);
-				return ;
-			}
 			if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0)
 			{
 				close(in_copy);			//maybe not working (trying to handle exit function)
 				close(out_copy);
 				exec_built(cmd, data);
 			}
+			handle_redir(&data->redir, index);
 			exec_built(cmd, data);
 			if (dup2(in_copy, 0) == -1 || dup2(out_copy, 1) == -1)
 			{
