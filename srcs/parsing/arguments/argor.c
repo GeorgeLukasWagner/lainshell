@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 09:48:18 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 10:15:20 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/16 19:52:40 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,21 @@ void trim_quotes(t_args **list)
 		}
 		tmp = tmp->next;
 	}
+}
+
+int	is_token(char c)
+{
+	if (c == '|' || c == '<' || c == '>')
+		return (1);
+	return (0);
+}
+
+size_t	special_len(char *str)
+{
+	size_t	len;
+	
+	len = 0;
+	while (str[len] && !is_space(str[len]) && !is_token(str[len]))
+		len++;
+	return (len);
 }

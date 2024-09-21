@@ -6,11 +6,14 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 13:04:35 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:04:30 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+#include <readline/readline.h>
+
+int	g_signum = 0;
 
 void	exit_lain(t_data data)
 {
@@ -36,13 +39,20 @@ void	lain_loop(t_data data)
 			{
 				//heredoc here
 				trim_quotes(&data.args);
-				data.cmd = make_cmd(data.args);
-				exec(&data);
-				free_cmd(data.cmd);
+				data.redir = get_redir(&data.args);
+				if (data.args != NULL)
+				{
+					data.cmd = make_cmd(data.args);
+					open_all_files(&data.redir);
+					exec(&data);
+					clean_cmd(&data.cmd);
+					free_cmd(data.cmd);
+				}
+				free_alt(&data.redir);
 			}
 			free_list(&data.args);
-			free(lain);
 		}
+		free(lain);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/17 15:45:34 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:07:25 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,19 @@ void	free_cmd(t_cmd *cmd);
 void	execute_cmd(t_data *data, t_cmd *cmd);
 void	put_error(char **msg);
 void	ft_printcmd(t_cmd *cmd);
-void	execute(t_data *data, t_cmd *cmd);
+void	execute(t_data *data, t_cmd *cmd, int index);
 size_t	varlen(char *data);
-void	handle_redir(t_redir *redir);
-void	exec_built_redir(t_data *data, t_cmd *cmd);
+int		handle_redir(t_alt **redir, int index);
+void	exec_built_redir(t_data *data, t_cmd *cmd, int index);
+size_t	special_len(char *str);
+int		is_token(char c);
+void	clean_cmd(t_cmd **cmd);
+void	ft_free(char **argv);
+t_alt	*get_redir(t_args **args);
+void	free_alt(t_alt **list);
+void	print_redir(t_alt *redir);
 void	execute_pipeline(t_data *data, t_cmd *cmd);
 void	exec(t_data *data);
+void	open_all_files(t_alt **redir);
 
 #endif

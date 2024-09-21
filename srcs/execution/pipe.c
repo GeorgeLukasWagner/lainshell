@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/19 13:24:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/19 18:04:12 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@ void	execute_pipeline(t_data *data, t_cmd *cmd)
 	int		pipefd[2];
 	int		prev_fd;
 	pid_t	pid;
+	int		index;
 
 	prev_fd = 0;
+	index = 0;
 	while (cmd)
 	{
 		if (cmd->next)
@@ -37,7 +39,7 @@ void	execute_pipeline(t_data *data, t_cmd *cmd)
 				dup2(pipefd[1], 1);
 				close(pipefd[1]);
 			}
-			execute(data, cmd);
+			execute(data, cmd, index);
 		}
 		if (pid > 0)
 		{
@@ -50,5 +52,6 @@ void	execute_pipeline(t_data *data, t_cmd *cmd)
 		else
 			perror("fork");
 		cmd = cmd->next;
+		index++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/19 13:16:26 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/21 14:20:14 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	in_redir(char *name)
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 0) == -1)
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
@@ -35,14 +35,14 @@ static void	out_redir(char *name)
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 1) == -1)
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
 	close(fd);
 }
 
-static void	appen_redir(char *name)
+static void	append_redir(char *name)
 {
 	int	fd;
 
@@ -50,7 +50,7 @@ static void	appen_redir(char *name)
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 1) == -1)
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
@@ -65,55 +65,97 @@ static void	heredoc_redir(void)
 	if (fd == -1)
 	{
 		ft_putstr_fd("Cannot access heredoc\n", 2);
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 0) == -1)
 		ft_putstr_fd("heredoc: No such a file or a directory\n", 2);
 	close(fd);
 }
 
-void	handle_redir(t_redir *redir)
+int	handle_redir(t_alt **redir, int index)
 {
-	t_redir	*temp;
+	t_alt	*temp;
+	int		flag;
 
-	temp = redir;
-	while (temp)
+	temp = *redir;
+	flag = TRUE;
+	while (temp && temp->index != index)
+		temp = temp->next;
+	while (temp && temp->index == index)	
 	{
-		if (temp->type == IN)
-			in_redir(temp->name);
-		if (temp->type == OUT)
-			out_redir(temp->name);
-		if (temp->type == APPEND)
-			appen_redir(temp->name);
-		if (temp->type == HERE_DOC)
-			heredoc_redir();
+		if (temp->token == REDIR_IN)
+		{
+			printf("im false\n");
+			if (temp->exec == FALSE)
+			{
+				flag = FALSE;
+			}
+			else
+				in_redir(temp->data);
+		}
+		if (temp->token == REDIR_OUT)
+		{
+			if (temp->exec == FALSE)
+				flag = FALSE;
+			else
+				out_redir(temp->data);
+		}
+		if (temp->token == REDIR_APPEND)
+		{
+			if (temp->exec == FALSE)
+				flag = FALSE;
+			else
+				append_redir(temp->data);
+		}
+		if (temp->token == HERE_DOC)
+		{
+			if (temp->exec == FALSE)
+				flag = FALSE;
+			else
+				heredoc_redir();
+		}
 		temp = temp->next;
 	}
+	return (flag);
 }
 
-// void	exec_built_redir(t_data *data, t_cmd *cmd)
-// {
-// 	int	in_copy;
-// 	int	out_copy;
+void	exec_built_redir(t_data *data, t_cmd *cmd, int index)
+{
+	int		in_copy;
+	int		out_copy;
+	t_alt	*temp;
 
-// 	if (cmd->redir)
-// 	{
-// 		in_copy = dup(0);
-// 		out_copy = dup(1);
-// 		//handle_redir(cmd->redir);
-// 		if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])))
-// 		{
-// 			close(in_copy);			//maybe not working (trying to handle exit function)
-// 			close(out_copy);
-// 			exec_built(cmd, data);
-// 		}
-// 		exec_built(cmd, data);
-// 		if (dup2(in_copy, 0) == -1 || dup2(out_copy, 1) == -1)
-// 		{
-// 			perror("dup2");
-// 			exit(1);
-// 		}
-// 		close(in_copy);
-// 		close(out_copy);
-// 	}
-// }
+	if (data->redir)
+	{
+		temp = data->redir;
+		while (temp && temp->index != index)
+			temp = temp->next;
+		if (temp != NULL)
+		{
+			in_copy = dup(0);
+			out_copy = dup(1);
+			if (handle_redir(&data->redir, index) == FALSE)
+			{
+				close(in_copy);
+				close(out_copy);
+				return ;
+			}
+			if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0)
+			{
+				close(in_copy);			//maybe not working (trying to handle exit function)
+				close(out_copy);
+				exec_built(cmd, data);
+			}
+			exec_built(cmd, data);
+			if (dup2(in_copy, 0) == -1 || dup2(out_copy, 1) == -1)
+			{
+				perror("dup2");
+				return ;
+			}
+			close(in_copy);
+			close(out_copy);
+		}
+	}
+	else
+		exec_built(cmd, data);
+}

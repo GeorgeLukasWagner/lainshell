@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:41:50 by gwagner           #+#    #+#             */
-/*   Updated: 2024/08/31 12:22:20 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/17 13:02:40 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int unclosedquotecheck(t_args *list)
 
 int	check_first(t_args *list)
 {
-	if (list->token > 3)
+	if (list->token > 4)
 	{
 		printf("lainshell: syntax error near unexpected token '%s'\n",
 			list->data);
@@ -69,7 +69,7 @@ int	syntax_error(t_args *list)
 		return (1);
 	while (tmp->next)
 	{
-		if (tmp->token > 3 && tmp->next->token > 3)
+		if (tmp->token > 3 && tmp->next->token > 4)
 		{
 			printf("lainshell: syntax error near unexpected token '%s'\n",
 				tmp->next->data);
