@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/17 15:45:25 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/25 05:13:43 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,8 @@ void	execute(t_data *data, t_cmd *cmd)
 					perror("fork");
 				else if (cmd->pid == 0)
 				{
-					if (cmd->redir)
-						handle_redir(cmd->redir);
+					// if (cmd->redir)
+					// 	handle_redir(cmd->redir);
 					execute_cmd(data, cmd);
 				}
 				waitpid(cmd->pid, 0, 0);

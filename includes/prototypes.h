@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 17:11:38 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/25 05:12:50 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	put_error(char **msg);
 void	ft_printcmd(t_cmd *cmd);
 void	execute(t_data *data, t_cmd *cmd);
 size_t	varlen(char *data);
-void	handle_redir(t_redir *redir);
 void	exec_built_redir(t_data *data, t_cmd *cmd);
 size_t	special_len(char *str);
 int		is_token(char c);
