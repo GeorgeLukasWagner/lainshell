@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 14:07:57 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/19 20:13:31 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,8 @@ void	print_redir(t_alt *redir)
 	tmp = redir;
 	while (tmp)
 	{
-		printf("redir: %s %d\n", tmp->data, tmp->token);
+		printf("redir: %s type: %d index: %d\n",
+			tmp->data, tmp->token, tmp->index);
 		tmp = tmp->next;
 	}
 }
@@ -149,7 +150,7 @@ t_alt	*get_redir(t_args **args)
 	while (tmp && tmp->next)
 	{
 		if (tmp->next->token == REDIR_OUT || tmp->next->token == REDIR_APPEND
-			|| tmp->next->token == REDIR_IN || tmp->next->token == REDIR_OUT)
+			|| tmp->next->token == REDIR_IN || tmp->next->token == HERE_DOC)
 		{
 			re_redir(tmp->next, &redir, i);
 			ret = rm_redir(tmp);
@@ -157,7 +158,7 @@ t_alt	*get_redir(t_args **args)
 				break ;
 		}
 		else if (tmp->token == REDIR_OUT || tmp->token == REDIR_APPEND
-			|| tmp->token == REDIR_IN || tmp->token == REDIR_OUT)
+			|| tmp->token == REDIR_IN || tmp->token == HERE_DOC)
 		{
 			re_redir(tmp, &redir, i);
 			ret = rm_redir2(&tmp);
@@ -168,7 +169,7 @@ t_alt	*get_redir(t_args **args)
 		if (tmp->token == PIPE && tmp->next)
 			i++;
 		if (tmp->next->token != REDIR_OUT && tmp->next->token != REDIR_APPEND
-			&& tmp->next->token != REDIR_IN && tmp->next)
+			&& tmp->next->token != REDIR_IN && tmp->next->token != HERE_DOC && tmp->next)
 			tmp = tmp->next;
 	}
 	return (redir);
