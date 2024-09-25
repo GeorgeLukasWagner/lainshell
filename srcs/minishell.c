@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/25 05:24:37 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/09/25 05:37:27 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	lain_loop(t_data data)
 				//heredoc here
 				trim_quotes(&data.args);
 				data.redir = get_redir(&data.args);
-				print_redir(data.redir);
 				if (data.args != NULL)
 				{
 					data.cmd = make_cmd(data.args);
@@ -60,12 +59,8 @@ void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		rl_replace_line("", 0);
 		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	else if (signum == SIGQUIT)
-	{
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -74,7 +69,7 @@ void	signal_handler(int signum)
 void	init_signal(void)
 {
 	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int ac, char **av, char **envp)
