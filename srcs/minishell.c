@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/21 18:03:15 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/28 03:10:03 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,3 @@ int	main(int ac, char **av, char **envp)
 	init_signal();
 	lain_loop(data);
 }
-

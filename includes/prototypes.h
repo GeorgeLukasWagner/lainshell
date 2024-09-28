@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/21 17:54:29 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:50:23 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ void	execute_pipeline(t_data *data, t_cmd *cmd);
 void	exec(t_data *data);
 void	open_all_files(t_alt **redir);
 int		check_redir_exec(t_alt *redir, int index);
+int		is_a_built(char **argv);
 
 #endif

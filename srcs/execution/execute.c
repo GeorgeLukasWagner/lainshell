@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/21 18:16:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:34:11 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	execute_cmd(t_data *data, t_cmd *cmd)
 	{
 		perror(cmd->argv[0]);
 		free_matrix(envp);
-		return ;
+		exit(127);
 	}
 	free_matrix(envp);
 }
@@ -140,8 +140,6 @@ int	check_redir_exec(t_alt *redir, int index)
 
 void	execute(t_data *data, t_cmd *cmd, int index)
 {
-	pid_t	pid;
-
 	if (cmd->argv == NULL)
 		return ;
 	if (is_a_built(cmd->argv) == TRUE)
@@ -153,20 +151,20 @@ void	execute(t_data *data, t_cmd *cmd, int index)
 			if (check_redir_exec(data->redir, index) == FALSE)
 				return ;
 		}
-		if (pathfinder(data->env, cmd->argv) == FALSE)
-		{
-			put_error((char *[]){cmd->argv[0], ": Command was not found\n", NULL});
-			return ;
-		}
-		pid = fork();
-		if (pid == -1)
+		cmd->pid = fork();
+		if (cmd->pid == -1)
 			perror("fork");
-		else if (pid == 0)
+		else if (cmd->pid == 0)
 		{
+			if (pathfinder(data->env, cmd->argv) == FALSE)
+			{
+				put_error((char *[]){cmd->argv[0], ": Command was not found\n", NULL});
+				exit(127);
+			}
 			handle_redir(&data->redir, index);
 			execute_cmd(data, cmd);
 		}
-		waitpid(pid, NULL, 0);
+		waitpid(cmd->pid, NULL, 0);
 	}
 }
 

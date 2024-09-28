@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/21 13:23:02 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:33:36 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_cmd
 {
 	char			**argv;
 	struct s_cmd	*next;
+	int				pid;
 }	t_cmd;
 
 typedef struct s_data

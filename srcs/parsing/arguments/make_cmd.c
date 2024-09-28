@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:20:06 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 17:49:34 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/23 16:37:11 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ t_cmd	*ft_cmdnew(char **argv, size_t len)
 		return (NULL);
 	new->argv = vecdup(argv, len);
 	new->next = NULL;
+	new->pid = 0;
 	return (new);
 }
 
