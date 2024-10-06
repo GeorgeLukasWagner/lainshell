@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/30 10:57:41 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:23:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,8 @@ void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
+		rl_replace_line("", 0);
 		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	else if (signum == SIGQUIT)
-	{
 		rl_on_new_line();
 		rl_redisplay();
 	}
@@ -74,7 +70,7 @@ void	signal_handler(int signum)
 void	init_signal(void)
 {
 	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
 
 int	main(int ac, char **av, char **envp)

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/04 18:48:02 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:23:03 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ t_alt	*get_redir(t_args **args)
 	while (tmp && tmp->next)
 	{
 		if (tmp->next->token == REDIR_OUT || tmp->next->token == REDIR_APPEND
-			|| tmp->next->token == REDIR_IN || tmp->next->token == REDIR_OUT)
+			|| tmp->next->token == REDIR_IN || tmp->next->token == HERE_DOC)
 		{
 			re_redir(tmp->next, &redir, i);
 			ret = rm_redir(tmp);
@@ -158,7 +158,7 @@ t_alt	*get_redir(t_args **args)
 				break ;
 		}
 		else if (tmp->token == REDIR_OUT || tmp->token == REDIR_APPEND
-			|| tmp->token == REDIR_IN || tmp->token == REDIR_OUT)
+			|| tmp->token == REDIR_IN || tmp->token == HERE_DOC)
 		{
 			re_redir(tmp, &redir, i);
 			ret = rm_redir2(&tmp);
@@ -169,7 +169,7 @@ t_alt	*get_redir(t_args **args)
 		if (tmp->token == PIPE && tmp->next)
 			i++;
 		if (tmp->next->token != REDIR_OUT && tmp->next->token != REDIR_APPEND
-			&& tmp->next->token != REDIR_IN && tmp->next)
+			&& tmp->next->token != REDIR_IN && tmp->next->token != HERE_DOC && tmp->next)
 			tmp = tmp->next;
 	}
 	return (redir);
