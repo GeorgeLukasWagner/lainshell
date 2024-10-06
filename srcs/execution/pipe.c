@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/04 18:45:49 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 16:10:48 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,3 @@ void	execute_pipeline(t_data *data, t_cmd *cmd)
 	}
 	while (waitpid(-1, NULL, 0) > 0);
 }
-
-//i literally have no idea how to fix pipeline for built ins
-//I have to rewrite my pipeline in a separate function and mb this way 
-//i will be able to fix it :(;;;;;
