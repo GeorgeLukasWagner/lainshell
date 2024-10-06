@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 02:21:51 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/14 22:54:35 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:04:28 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	delete_node(char *str, t_env *env, int type)
 	free(name);
 }
 
-int	ft_unset(t_data *data, t_cmd *cmd)
+int	ft_unset(t_data **data, t_cmd *cmd)
 {
 	t_cmd	*temp;
 	int		i;
@@ -78,8 +78,8 @@ int	ft_unset(t_data *data, t_cmd *cmd)
 	i = 1;
 	while (temp->argv[i] != NULL)
 	{
-		if (export_exist(temp->argv[i], data->env) == 0)
-			delete_node(temp->argv[i], data->env, 1);
+		if (export_exist(temp->argv[i], (*data)->env) == 0)
+			delete_node(temp->argv[i], (*data)->env, 1);
 		i++;
 	}
 	return (0);

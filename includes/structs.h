@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 17:38:48 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 17:52:20 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ typedef struct s_alt
 {
 	char			*data;
 	t_token			token;
+	int				exec;
 	int				index;
 	struct s_alt	*next;
 }	t_alt;
@@ -52,7 +53,6 @@ typedef struct s_alt
 typedef struct s_cmd
 {
 	char			**argv;
-	int				pid;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -62,6 +62,10 @@ typedef struct s_data
 	t_args	*args;
 	t_cmd	*cmd;
 	t_alt	*redir;
+	int		pid;
+	int		pipefd[2];
+	int		fd[2];
+	int		ecode;
 }	t_data;
 
 #endif

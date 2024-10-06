@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/25 05:13:43 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 16:20:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,51 +63,125 @@ int	is_a_built(char **argv)
 		return (FALSE);
 }
 
-void	execute_cmd(t_data *data, t_cmd *cmd)
+void	execute_cmd(t_data **data, t_cmd *cmd, int index)
 {
 	char	**envp;
 
-	envp = create_envp(data->env);
+	envp = create_envp((*data)->env);
+	if (check_redir_exec((*data)->redir, index) == FALSE)
+		exit(1);
 	if (execve(cmd->argv[0], cmd->argv, envp) == -1)
 	{
 		perror(cmd->argv[0]);
 		free_matrix(envp);
-		return ;
+		exit(127);
 	}
 	free_matrix(envp);
 }
 
-void	execute(t_data *data, t_cmd *cmd)
+void	open_all_files(t_alt **redir)
 {
-	if (cmd->next == NULL)
+	t_alt	*cur;
+	int		fd;
+
+	cur = *redir;
+	while (cur)
 	{
-		if (is_a_built(cmd->argv) == TRUE)
-			exec_built(cmd, data);
-		else
+		if (cur->token == REDIR_IN)
 		{
-			if (pathfinder(data->env, cmd->argv) == TRUE)
+			fd = open(cur->data, O_RDONLY);
+			if (fd == -1)
 			{
-				cmd->pid = fork();
-				if (cmd->pid == -1)
-					perror("fork");
-				else if (cmd->pid == 0)
-				{
-					// if (cmd->redir)
-					// 	handle_redir(cmd->redir);
-					execute_cmd(data, cmd);
-				}
-				waitpid(cmd->pid, 0, 0);
+				// put_error((char *[]){cur->data, ": No such a file or a directory2\n", NULL});
+				cur->exec = FALSE;
+				break;
 			}
-			else
-				put_error((char*[]){cmd->argv[0], ": Command was not found\n", NULL});
+			close(fd);
 		}
+		else if (cur->token == REDIR_OUT)
+		{
+			fd = open(cur->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+			if (fd == -1)
+			{
+				put_error((char *[]){cur->data, ": No such a file or a directory\n", NULL});
+				cur->exec = FALSE;
+			}
+			close(fd);
+		}
+		else if (cur->token == REDIR_APPEND)
+		{
+			fd = open(cur->data, O_WRONLY | O_CREAT | O_APPEND, 0644);
+			if (fd == -1)
+			{
+				put_error((char *[]){cur->data, ": No such a file or a director\n", NULL});
+				cur->exec = FALSE;
+			}
+			close(fd);
+		}
+		// else if (cur->token == HERE_DOC)
+		// 	//here_doc execute;
+		cur = cur->next;
+	}
+}
+
+int	check_redir_exec(t_alt *redir, int index)
+{
+	t_alt	*cur;
+
+	cur = redir;
+	while (cur && cur->index != index)
+		cur = cur->next;
+	while (cur && cur->index == index)
+	{
+		if (cur->exec == FALSE)
+			exit(1);
+		cur = cur->next;
+	}
+	return (TRUE);
+}
+
+void	execute(t_data *data, t_cmd *cmd, int index)
+{
+	pid_t	pid;
+
+	if (cmd->argv == NULL)
+		return ;
+	if (is_a_built(cmd->argv) == TRUE)
+	{
+		open_copy_fds(&data);
+		exec_built_redir(&data, cmd, index, 0);
+	}
+	else
+	{
+		if (data->redir)
+		{
+			if (check_redir_exec(data->redir, index) == FALSE)
+				return ;
+		}
+		pid = fork();
+		if (pid == -1)
+			perror("fork");
+		else if (pid == 0)
+		{
+			if (pathfinder(data->env, cmd->argv) == FALSE)
+			{
+				put_error((char *[]){cmd->argv[0], ": Command was not found\n", NULL});
+				exit(127);
+			}
+			handle_redir(&data->redir, index);
+			execute_cmd(&data, cmd, index);
+		}
+		waitpid(pid, NULL, 0);
 	}
 }
 
 void	exec(t_data *data)
 {
 	if (data->cmd->next == NULL)
-		execute(data, data->cmd);
+		execute(data, data->cmd, 0);
 	else
 		execute_pipeline(data, data->cmd);
 }
+
+
+//have to create a function check redirections for the execve 

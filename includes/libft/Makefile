@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/06 11:56:37 by gwagner           #+#    #+#              #
-#    Updated: 2024/08/18 15:16:08 by gwagner          ###   ########.fr        #
+#    Updated: 2024/10/06 16:29:14 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRC			=	ft_isalnum.c ft_isprint.c ft_memcmp.c  ft_putchar_fd.c ft_split.c \
 				ft_strnstr.c ft_tolower.c ft_bzero.c   ft_isascii.c ft_memset.c \
 				ft_memmove.c ft_putnbr_fd.c  ft_strdup.c  ft_strlen.c  ft_strrchr.c \
 				ft_toupper.c ft_calloc.c  ft_isdigit.c ft_memchr.c  ft_memset.c  \
-				ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_striteri.c
+				ft_putstr_fd.c  ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_striteri.c \
+				get_next_line.c
 SRC_DIR		= srcs/
 SRCS		= $(patsubst %.c,$(SRC_DIR)%.c,$(SRC))
 OBJS		= $(SRCS:.c=.o)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/25 05:37:27 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 16:23:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,9 @@ void	lain_loop(t_data data)
 				if (data.args != NULL)
 				{
 					data.cmd = make_cmd(data.args);
+					open_all_files(&data.redir);
+					exec(&data);
 					clean_cmd(&data.cmd);
-					execute(&data, data.cmd);
 					free_cmd(data.cmd);
 				}
 				free_alt(&data.redir);
@@ -79,7 +80,11 @@ int	main(int ac, char **av, char **envp)
 	(void)ac;
 	(void)av;
 	data.env = init_env(envp);
+	data.pid = -1;
+	data.pipefd[0] = -1;
+	data.pipefd[1] = -1;
+	data.fd[0] = -1;
+	data.fd[1] = -1;
 	init_signal();
 	lain_loop(data);
 }
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 20:13:31 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 16:23:03 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_alt	*altnew(char *data, t_token token, size_t i)
 		return (NULL);
 	new->data = data;
 	new->token = token;
+	new->exec = TRUE;
 	new->index = i;
 	new->next = NULL;
 	return (new);
@@ -130,8 +131,7 @@ void	print_redir(t_alt *redir)
 	tmp = redir;
 	while (tmp)
 	{
-		printf("redir: %s type: %d index: %d\n",
-			tmp->data, tmp->token, tmp->index);
+		printf("redir: %s %d INDEX IS: %d\n", tmp->data, tmp->token, tmp->index);
 		tmp = tmp->next;
 	}
 }

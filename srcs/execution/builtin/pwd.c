@@ -6,13 +6,13 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/16 12:54:18 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:03:13 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 
-int	exec_built(t_cmd *cmd, t_data *data)
+int	exec_built(t_cmd *cmd, t_data **data)
 {
 	if (ft_strncmp(cmd->argv[0], "echo", ft_strlen(cmd->argv[0])) == 0)
 		return (ft_echo(cmd));
@@ -41,12 +41,12 @@ int	matrix_size(char **matrix)
 	return (i);
 }
 
-int	ft_pwd(t_data *data)
+int	ft_pwd(t_data **data)
 {
 	char	*pwd;
 	t_env	*node;
 
-	node = find_node("PWD=", data->env);
+	node = find_node("PWD=", (*data)->env);
 	pwd = ft_substr(node->data, 4, ft_strlen(node->data));
 	printf("%s\n", pwd);
 	free(pwd);
