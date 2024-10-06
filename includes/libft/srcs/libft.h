@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42.fr>            +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/07 13:07:25 by gwagner           #+#    #+#             */
-/*   Updated: 2024/06/12 13:26:10 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 16:28:29 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
+# define BUFFER_SIZE 10
 
 # include <stdlib.h>
 # include <unistd.h>
 # include <stddef.h>
 
 int		ft_atoi(const char *str);
+char	*get_next_line(int fd);
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t size, size_t nmemb);
 int		ft_isalnum(int c);
