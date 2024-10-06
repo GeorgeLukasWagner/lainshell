@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 17:14:49 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 17:38:48 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ typedef struct s_alt
 typedef struct s_cmd
 {
 	char			**argv;
-	struct s_cmd	*next;
 	int				pid;
+	struct s_cmd	*next;
 }	t_cmd;
 
 typedef struct s_data
