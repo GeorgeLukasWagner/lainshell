@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/23 16:34:11 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:42:54 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,13 @@ int	is_a_built(char **argv)
 		return (FALSE);
 }
 
-void	execute_cmd(t_data *data, t_cmd *cmd)
+void	execute_cmd(t_data **data, t_cmd *cmd, int index)
 {
 	char	**envp;
 
-	envp = create_envp(data->env);
+	envp = create_envp((*data)->env);
+	if (check_redir_exec((*data)->redir, index) == FALSE)
+		exit(1);
 	if (execve(cmd->argv[0], cmd->argv, envp) == -1)
 	{
 		perror(cmd->argv[0]);
@@ -90,7 +92,7 @@ void	open_all_files(t_alt **redir)
 			fd = open(cur->data, O_RDONLY);
 			if (fd == -1)
 			{
-				put_error((char *[]){cur->data, ": No such a file or a directorY\n", NULL});
+				// put_error((char *[]){cur->data, ": No such a file or a directory2\n", NULL});
 				cur->exec = FALSE;
 				break;
 			}
@@ -101,7 +103,7 @@ void	open_all_files(t_alt **redir)
 			fd = open(cur->data, O_WRONLY | O_CREAT | O_TRUNC, 0644);
 			if (fd == -1)
 			{
-				put_error((char *[]){cur->data, ": No such a file or a director\n", NULL});
+				put_error((char *[]){cur->data, ": No such a file or a directory\n", NULL});
 				cur->exec = FALSE;
 			}
 			close(fd);
@@ -132,7 +134,7 @@ int	check_redir_exec(t_alt *redir, int index)
 	while (cur && cur->index == index)
 	{
 		if (cur->exec == FALSE)
-			return (FALSE);
+			exit(1);
 		cur = cur->next;
 	}
 	return (TRUE);
@@ -140,10 +142,15 @@ int	check_redir_exec(t_alt *redir, int index)
 
 void	execute(t_data *data, t_cmd *cmd, int index)
 {
+	pid_t	pid;
+
 	if (cmd->argv == NULL)
 		return ;
 	if (is_a_built(cmd->argv) == TRUE)
-		exec_built_redir(data, cmd, index);
+	{
+		open_copy_fds(&data);
+		exec_built_redir(&data, cmd, index, 0);
+	}
 	else
 	{
 		if (data->redir)
@@ -151,10 +158,10 @@ void	execute(t_data *data, t_cmd *cmd, int index)
 			if (check_redir_exec(data->redir, index) == FALSE)
 				return ;
 		}
-		cmd->pid = fork();
-		if (cmd->pid == -1)
+		pid = fork();
+		if (pid == -1)
 			perror("fork");
-		else if (cmd->pid == 0)
+		else if (pid == 0)
 		{
 			if (pathfinder(data->env, cmd->argv) == FALSE)
 			{
@@ -162,9 +169,9 @@ void	execute(t_data *data, t_cmd *cmd, int index)
 				exit(127);
 			}
 			handle_redir(&data->redir, index);
-			execute_cmd(data, cmd);
+			execute_cmd(&data, cmd, index);
 		}
-		waitpid(cmd->pid, NULL, 0);
+		waitpid(pid, NULL, 0);
 	}
 }
 

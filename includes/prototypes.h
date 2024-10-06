@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/23 16:50:23 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:25:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ int		env_lstsize(t_env *head);
 void	free_env(t_env **list);
 t_env	*init_env(char **envp);
 void	put_vars(t_args **list, t_env *env);
-int 	ft_pwd(t_data *data);
-int		ft_cd(t_data *data, t_cmd *cmd);
-int 	ft_env(t_data *data, t_cmd *cmd);
-int 	exec_built(t_cmd *cmd, t_data *data);
+int 	ft_pwd(t_data **data);
+int		ft_cd(t_data **data, t_cmd *cmd);
+int 	ft_env(t_data **data, t_cmd *cmd);
+int 	exec_built(t_cmd *cmd, t_data **data);
 void	ft_printenv(t_env *head);
 t_env	*find_node(const char *to_find, t_env *env);
-int		ft_export(t_data *data, t_cmd *cmd);
+int		ft_export(t_data **data, t_cmd *cmd);
 void	free_matrix(char **str);
 int		export_exist(char *data, t_env *env);
-int		ft_unset(t_data *data, t_cmd *cmd);
+int		ft_unset(t_data **data, t_cmd *cmd);
 int 	quotewordlen(char *line);
 void 	trim_quotes(t_args **list);
 size_t	varlen(char *data);
@@ -59,13 +59,13 @@ int		matrix_size(char **matrix);
 int		ft_echo(t_cmd *cmd);
 int		pathfinder(t_env *env, char **args);
 void	free_cmd(t_cmd *cmd);
-void	execute_cmd(t_data *data, t_cmd *cmd);
+void	execute_cmd(t_data **data, t_cmd *cmd, int index);
 void	put_error(char **msg);
 void	ft_printcmd(t_cmd *cmd);
 void	execute(t_data *data, t_cmd *cmd, int index);
 size_t	varlen(char *data);
 void	handle_redir(t_alt **redir, int index);
-void	exec_built_redir(t_data *data, t_cmd *cmd, int index);
+void	exec_built_redir(t_data **data, t_cmd *cmd, int index, int type);
 size_t	special_len(char *str);
 int		is_token(char c);
 void	clean_cmd(t_cmd **cmd);
@@ -78,5 +78,7 @@ void	exec(t_data *data);
 void	open_all_files(t_alt **redir);
 int		check_redir_exec(t_alt *redir, int index);
 int		is_a_built(char **argv);
+void	open_copy_fds(t_data **data);
+void	close_copy_fds(t_data **data);
 
 #endif

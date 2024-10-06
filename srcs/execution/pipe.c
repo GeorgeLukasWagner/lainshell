@@ -6,107 +6,112 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/28 03:20:08 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:45:49 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
+// static void	pipe_built(t_data **data, t_cmd *cmd, int *prev_fd, int index)
+// {
+// 	open_copy_fds(data);
+// 	if (*prev_fd != -1)
+// 	{
+// 		dup2(*prev_fd, 0);
+// 		close(*prev_fd);
+// 	}
+// 	if (cmd->next)
+// 		dup2((*data)->pipefd[1], 1);
+// 	exec_built_redir(data, cmd, index);
+// 	close((*data)->pipefd[0]);
+// 	close((*data)->pipefd[1]);
+// }
+
+static void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd)
+{
+	if (*prev_fd != -1)
+		close(*prev_fd);
+	if (cmd->next)
+	{
+		close((*data)->pipefd[1]);
+		*prev_fd = (*data)->pipefd[0];
+	}
+	else
+	{
+		close((*data)->pipefd[1]);
+		close((*data)->pipefd[0]);
+	}
+}
+
+static void child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index)
+{
+	if (*prev_fd != -1)
+	{
+		dup2(*prev_fd, 0);
+		close(*prev_fd);
+	}
+	if (cmd->next)
+		dup2((*data)->pipefd[1], 1);
+	close((*data)->pipefd[0]);
+	close((*data)->pipefd[1]);
+	if (is_a_built(cmd->argv) == TRUE)
+	{
+		exec_built_redir(data, cmd, index, 1);
+		exit((*data)->ecode);
+	}
+	else
+	{
+		print_redir((*data)->redir);
+		handle_redir(&(*data)->redir, index);
+		if (pathfinder((*data)->env, cmd->argv) == FALSE)
+		{
+			put_error((char *[]){cmd->argv[0], ": Command was not found\n", NULL});
+			exit(127);
+		}
+		execute_cmd(data, cmd, index);
+		exit(0);
+	}
+}
+
 void	execute_pipeline(t_data *data, t_cmd *cmd)
 {
-	int		pipefd[2];
 	int		prev_fd;
 	int		index;
-	pid_t	pid;
 	t_cmd	*cur;
+	pid_t	last_pid;
 
 	prev_fd = -1;
 	cur = cmd;
 	index = 0;
 	while (cur)
 	{
-		if (cur->next)
+		if (cmd->next && pipe(data->pipefd) == -1)
 		{
-			if (pipe(pipefd) == -1)
-			{
-				perror("pipe");
-				exit(1);
-			}
-		}
-		if (is_a_built(cur->argv) == TRUE)
-		{
-			if (prev_fd != -1)
-			{
-				dup2(prev_fd, 0);
-				close(prev_fd);
-			}
-			if (cur->next)
-			{
-				dup2(pipefd[1], 1);
-				close(pipefd[0]);
-				close(pipefd[1]);
-			}
-			exec_built_redir(data, cur, index);
-			if (cur->next)
-			{
-				prev_fd = pipefd[0];
-				close(pipefd[1]);
-			}
-			else
-				close(pipefd[0]);
-			index++;
-			cur = cur->next;
+			perror("pipe");
+			exit(1);
 		}
 		else
 		{
-			pid = fork();
-			if (pid == -1)
+			data->pid = fork();
+			if (data->pid == -1)
 			{
 				perror("fork");
 				exit(1);
 			}
-			else if (pid == 0)
-			{
-				if (prev_fd != -1)
-				{
-					dup2(prev_fd, 0);
-					close(prev_fd);
-				}
-				if (cur->next)
-				{
-					dup2(pipefd[1], 1);
-					close(pipefd[1]);
-					close(pipefd[0]);
-				}
-				handle_redir(&data->redir, index);
-				if (pathfinder(data->env, cur->argv) == FALSE)
-				{
-					put_error((char *[]){cmd->argv[0], ": Command was not found\n", NULL});
-					exit(127);
-				}
-				execute_cmd(data, cur);
-				exit(0);
-			}
+			else if (data->pid == 0)
+				child_process(&data, cur, &prev_fd, index);
 			else
 			{
-				if (prev_fd != -1)
-					close(prev_fd);
-				if (cur->next)
-				{
-					close(pipefd[1]);
-					prev_fd = pipefd[0];
-				}
-				else
-				{
-					close(pipefd[1]);
-					close(pipefd[0]);
-				}
-				index++;
-				cur = cur->next;
+				last_pid = data->pid;
+				parent_process(&data, cur, &prev_fd);
 			}
 		}
+		index++;
+		cur = cur->next;
 	}
 	while (waitpid(-1, NULL, 0) > 0);
 }
 
 //i literally have no idea how to fix pipeline for built ins
+//I have to rewrite my pipeline in a separate function and mb this way 
+//i will be able to fix it :(;;;;;

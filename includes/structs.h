@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/23 16:33:36 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/03 20:27:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ typedef struct s_cmd
 {
 	char			**argv;
 	struct s_cmd	*next;
-	int				pid;
 }	t_cmd;
 
 typedef struct s_data
@@ -63,6 +62,10 @@ typedef struct s_data
 	t_args	*args;
 	t_cmd	*cmd;
 	t_alt	*redir;
+	int		pid;
+	int		pipefd[2];
+	int		fd[2];
+	int		ecode;
 }	t_data;
 
 #endif

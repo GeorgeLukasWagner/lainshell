@@ -6,20 +6,23 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/28 01:27:16 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:44:27 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+# define PIPE 1
+# define PARENT 0
 
 static void	in_redir(char *name)
 {
 	int fd;
 
 	fd = open(name, O_RDONLY);
+	printf("FD IS %d\n", fd);
 	if (fd == -1)
 	{
-		put_error((char *[]){name, ": No such a file or a director\n", NULL});
+		put_error((char *[]){name, ": No such a file or a director1\n", NULL});
 		exit(1);
 	}
 	if (dup2(fd, 0) == -1)
@@ -108,40 +111,49 @@ void	handle_redir(t_alt **redir, int index)
 	}
 }
 
-void	exec_built_redir(t_data *data, t_cmd *cmd, int index)
+void	open_copy_fds(t_data **data)
 {
-	int		in_copy;
-	int		out_copy;
+	(*data)->fd[0] = dup(0);
+	(*data)->fd[1] = dup(1);
+}
+
+void	close_copy_fds(t_data **data)
+{
+	close((*data)->fd[0]);
+	close((*data)->fd[1]);
+}
+
+void	exec_built_redir(t_data **data, t_cmd *cmd, int index, int type)
+{
 	t_alt	*temp;
 
-	in_copy = dup(0);
-	out_copy = dup(1);
-	if (data->redir)
+	if ((*data)->redir)
 	{
-		temp = data->redir;
+		temp = (*data)->redir;
 		while (temp && temp->index != index)
 			temp = temp->next;
 		if (temp != NULL)
 		{
-			if (data->redir)
-				if (check_redir_exec(data->redir, index) == FALSE)
+			if ((*data)->redir)
+				if (check_redir_exec((*data)->redir, index) == FALSE)
 				{
-					close(in_copy);
-					close(out_copy);
+					close_copy_fds(data);
 					return ;
 				}
 			if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0)
 			{
-				close(in_copy);			//maybe not working (trying to handle exit function)
-				close(out_copy);
+				close_copy_fds(data);
 				exec_built(cmd, data);
 			}
-			handle_redir(&data->redir, index);
+			handle_redir(&(*data)->redir, index);
 		}
 	}
-	exec_built(cmd, data);
-	if (dup2(in_copy, 0) == -1 || dup2(out_copy, 1) == -1)
-		perror("dup2");
-	close(in_copy);
-	close(out_copy);
+	(*data)->ecode = exec_built(cmd, data);
+	if (type == PARENT)
+	{
+		if (dup2((*data)->fd[0], 0) == -1 || dup2((*data)->fd[1], 1) == -1)
+			perror("dup2");
+		close((*data)->fd[0]);
+		close((*data)->fd[1]);
+	}
 }

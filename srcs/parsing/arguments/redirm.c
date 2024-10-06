@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/21 13:23:20 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/04 18:48:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	print_redir(t_alt *redir)
 	tmp = redir;
 	while (tmp)
 	{
-		printf("redir: %s %d\n", tmp->data, tmp->token);
+		printf("redir: %s %d INDEX IS: %d\n", tmp->data, tmp->token, tmp->index);
 		tmp = tmp->next;
 	}
 }

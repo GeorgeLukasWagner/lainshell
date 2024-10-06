@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 22:48:01 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/21 18:20:41 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/09/30 11:05:06 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	change_dir(char *dir, t_data *data)
 	return (0);
 }
 
-int	ft_cd(t_data *data, t_cmd *cmd)
+int	ft_cd(t_data **data, t_cmd *cmd)
 {
 	t_env	*home;
 
@@ -81,20 +81,20 @@ int	ft_cd(t_data *data, t_cmd *cmd)
 	}
 	if (matrix_size(cmd->argv) == 1)
 	{
-		home = find_node("HOME=", data->env);
+		home = find_node("HOME=", (*data)->env);
 		if (!home)
 		{
 			ft_putstr_fd(": cd: HOME not set\n", 2);
 			return (1);
 		}
-		if (change_dir(NULL, data) == 1)
+		if (change_dir(NULL, *data) == 1)
 			return (1);
 	}
 	else
 	{
-		if (change_dir(cmd->argv[1], data) == 1)
+		if (change_dir(cmd->argv[1], *data) == 1)
 			return (1);
 	}
-	update_dir(data);
+	update_dir(*data);
 	return (0);
 }
