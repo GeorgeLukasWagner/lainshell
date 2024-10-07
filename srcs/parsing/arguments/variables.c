@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:51:58 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 18:49:54 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 15:38:32 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,28 @@ void	remove_var(t_args **list, size_t i)
 	free(tmp);
 }
 
-void	check_var(t_args **list, t_env *env)
+void	put_exit_code(t_args **list, size_t i, int ecode)
+{
+	char	*new[3];
+
+	new[0] = ft_substr((*list)->data, 0, i - 1);
+	new[1] = ft_itoa(ecode);
+	new[2] = ft_substr((*list)->data + i, 1,
+			ft_strlen((*list)->data + i + 1));
+	free((*list)->data);
+	(*list)->data = ft_strjoin(new[0], new[1]);
+	free(new[0]);
+	free(new[1]);
+	new[0] = ft_strjoin((*list)->data, new[2]);
+	free((*list)->data);
+	(*list)->data = new[0];
+	free(new[2]);
+}
+
+void	check_var(t_args **list, t_env *env, int ecode)
 {
 	size_t	i;
-
+	(void)ecode;
 	i = 0;
 	while ((*list)->data[i])
 	{
@@ -86,11 +104,17 @@ void	check_var(t_args **list, t_env *env)
 			if ((*list)->data[i] == '\0')
 				break ;
 		}
+		else if ((*list)->data[i] == '$' && (*list)->data[i + 1] == '?')
+		{
+			put_exit_code(list, i + 1, ecode);
+			if ((*list)->data[i] == '\0')
+				break ;
+		}
 		i++;
 	}
 }
 
-void	put_vars(t_args **list, t_env *env)
+void	put_vars(t_args **list, t_env *env, int ecode)
 {
 	t_args	*tmp;
 
@@ -98,7 +122,7 @@ void	put_vars(t_args **list, t_env *env)
 	while (tmp)
 	{
 		if (tmp->token < 3)
-			check_var(&tmp, env);
+			check_var(&tmp, env, ecode);
 		tmp = tmp->next;
 	}
 }

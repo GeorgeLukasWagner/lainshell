@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 13:05:22 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:41:01 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	lain_loop(t_data data)
 		{
 			add_history(lain);
 			data.args = split_args(lain);
-			put_vars(&data.args, data.env);
+			put_vars(&data.args, data.env, data.ecode);
 			if (!syntax_error(data.args))
 			{
 				trim_quotes(&data.args);
@@ -43,8 +43,8 @@ void	lain_loop(t_data data)
 				{
 					data.cmd = make_cmd(data.args);
 					open_all_files(&data.redir);
+					ft_printcmd(data.cmd);
 					exec(&data);
-					printf("EXIT CODE IS: %d\n", data.ecode);
 					clean_cmd(&data.cmd);
 					free_cmd(data.cmd);
 				}

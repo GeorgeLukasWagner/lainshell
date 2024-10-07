@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 13:05:04 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:19:52 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	env_lstadd_back(t_env **list, t_env *new);
 int		env_lstsize(t_env *head);
 void	free_env(t_env **list);
 t_env	*init_env(char **envp);
-void	put_vars(t_args **list, t_env *env);
+void	put_vars(t_args **list, t_env *env, int ecode);
 int 	ft_pwd(t_data **data);
 int		ft_cd(t_data **data, t_cmd *cmd);
 int 	ft_env(t_data **data, t_cmd *cmd);
