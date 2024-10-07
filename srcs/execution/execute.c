@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:00:41 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:49:53 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,25 @@ int	env_lstsize_exec(t_env *env)
 	return (i);
 }
 
+void	redir_error(t_data **data, int index)
+{
+	t_alt	*cur;
+
+	cur = (*data)->redir;
+	if (cur->index == index)
+	{
+		while (cur->index != index)
+			cur = cur->next;
+	}
+	put_error((char *[]){cur->data, ": No such file or a directory\n", NULL});
+}
+
 static void	execute_util(t_data *data, t_cmd *cmd, int index)
 {
 	if (data->redir)
 	{
 		if (check_redir_exec(data->redir, index) == FALSE)
-			return ;
+			return(redir_error(&data, index));
 	}
 	data->pid = fork();
 	if (data->pid == -1)

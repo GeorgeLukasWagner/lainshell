@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 13:00:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:00:48 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:14:35 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,10 @@ void	execute_cmd(t_data **data, t_cmd *cmd, int index)
 		exit(127);
 	}
 	free_matrix(envp);
+}
+
+void	ft_close(int *fd)
+{
+	if (*fd >= 0)
+		close(*fd);
 }
