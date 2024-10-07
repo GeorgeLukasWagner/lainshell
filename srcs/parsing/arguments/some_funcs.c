@@ -1,40 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   arglist01.c                                        :+:      :+:    :+:   */
+/*   some_funcs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/10 19:55:22 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 18:50:41 by gwagner          ###   ########.fr       */
+/*   Created: 2024/10/07 12:17:35 by gwagner           #+#    #+#             */
+/*   Updated: 2024/10/07 12:19:12 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "args.h"
 
-t_args	*ft_lstnew(char *data, t_token token)
+void	ft_free(char **argv)
 {
-	t_args	*new;
+	size_t	i;
+
+	i = 0;
+	while (argv[i])
+	{
+		free(argv[i]);
+		i++;
+	}
+	free(argv);
+}
+
+t_alt	*altnew(char *data, t_token token, size_t i)
+{
+	t_alt	*new;
 
 	new = malloc(sizeof(*new));
-	if (new == NULL)
+	if (!new)
 		return (NULL);
 	new->data = data;
 	new->token = token;
-	new->append = 0;
+	new->exec = TRUE;
+	new->index = i;
 	new->next = NULL;
 	return (new);
 }
 
-void	ft_lstadd_front(t_args **list, t_args *new)
+t_alt	*ft_altlast(t_alt *head)
 {
-	new->next = *list;
-	*list = new;
-}
-
-t_args	*ft_lstlast(t_args *head)
-{
-	t_args	*tmp;
+	t_alt	*tmp;
 
 	tmp = head;
 	while (tmp->next != NULL)
@@ -42,13 +50,13 @@ t_args	*ft_lstlast(t_args *head)
 	return (tmp);
 }
 
-void	ft_lstadd_back(t_args **list, t_args *new)
+void	ft_altadd_back(t_alt **list, t_alt *new)
 {
-	t_args	*n;
+	t_alt	*n;
 
 	if (*list)
 	{
-		n = ft_lstlast(*list);
+		n = ft_altlast(*list);
 		n->next = new;
 		new->next = NULL;
 	}
@@ -59,17 +67,15 @@ void	ft_lstadd_back(t_args **list, t_args *new)
 	}
 }
 
-int	ft_lstsize(t_args *head)
+void	print_redir(t_alt *redir)
 {
-	size_t	i;
-	t_args	*tmp;
+	t_alt	*tmp;
 
-	tmp = head;
-	i = 0;
+	tmp = redir;
 	while (tmp)
 	{
+		printf("redir: %s %d INDEX IS: %d\n",
+			tmp->data, tmp->token, tmp->index);
 		tmp = tmp->next;
-		i++;
 	}
-	return (i);
 }

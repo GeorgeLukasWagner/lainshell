@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 09:48:18 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 19:52:40 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 18:49:02 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*destroyquotes(char *data)
 	return (new);
 }
 
-void trim_quotes(t_args **list)
+void	trim_quotes(t_args **list)
 {
 	t_args	*tmp;
 	char	*data;
@@ -88,7 +88,7 @@ int	is_token(char c)
 size_t	special_len(char *str)
 {
 	size_t	len;
-	
+
 	len = 0;
 	while (str[len] && !is_space(str[len]) && !is_token(str[len]))
 		len++;

@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:51:58 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/13 21:59:03 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 18:49:54 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	makenewarg(t_args **list, size_t i, t_env *env)
 	start = findstart(env->data);
 	new[0] = ft_substr((*list)->data, 0, i - 1);
 	new[1] = ft_substr(env->data, start, ft_strlen(env->data + start));
-	new[2] = ft_substr((*list)->data + i + len, 0, ft_strlen((*list)->data + i + len));
+	new[2] = ft_substr((*list)->data + i + len, 0,
+			ft_strlen((*list)->data + i + len));
 	free((*list)->data);
 	(*list)->data = ft_strjoin(new[0], new[1]);
 	free(new[0]);
@@ -57,7 +58,8 @@ void	remove_var(t_args **list, size_t i)
 
 	len = varlen((*list)->data + i);
 	new = ft_substr((*list)->data, 0, i);
-	tmp = ft_substr((*list)->data + i + len, 0, ft_strlen((*list)->data + i + len));
+	tmp = ft_substr((*list)->data + i + len, 0,
+			ft_strlen((*list)->data + i + len));
 	free((*list)->data);
 	if (new[0] == '\0' && tmp[0] == '\0')
 		(*list)->data = ft_strdup("");
@@ -74,7 +76,8 @@ void	check_var(t_args **list, t_env *env)
 	i = 0;
 	while ((*list)->data[i])
 	{
-		if ((*list)->data[i] == '$' && (*list)->data[i + 1] != '?' && ((*list)->data[i + 1] != '\0'))
+		if ((*list)->data[i] == '$' && (*list)->data[i + 1] != '?'
+			&& ((*list)->data[i + 1] != '\0'))
 		{
 			if (check_env((*list)->data + i + 1, env))
 				makenewarg(list, i + 1, env);

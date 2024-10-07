@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 16:19:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:21:34 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,10 @@ int		check_redir_exec(t_alt *redir, int index);
 int		is_a_built(char **argv);
 void	open_copy_fds(t_data **data);
 void	close_copy_fds(t_data **data);
+char	**vecdup(char **argv, size_t len);
+void	ft_cmdadd_back(t_cmd **list, t_cmd *new);
+void	ft_altadd_back(t_alt **list, t_alt *new);
+t_alt	*altnew(char *data, t_token token, size_t i);
+int		redircheck(t_args *tmp, int i);
 
 #endif

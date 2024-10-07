@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:41:50 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/19 20:07:12 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/06 18:28:23 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	search_quote(char *line)
 	return (0);
 }
 
-int unclosedquotecheck(t_args *list)
+int	unclosedquotecheck(t_args *list)
 {
 	t_args	*tmp;
 
@@ -41,7 +41,8 @@ int unclosedquotecheck(t_args *list)
 	{
 		if (tmp->token <= ARG && search_quote(tmp->data))
 		{
-			printf("lainshell: syntax error near unclosed quote ' %s '\n", tmp->data);
+			printf("lainshell: syntax error near unclosed quote ' %s '\n",
+				tmp->data);
 			return (1);
 		}
 		tmp = tmp->next;

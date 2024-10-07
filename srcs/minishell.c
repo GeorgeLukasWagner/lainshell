@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 16:23:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:07:55 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	lain_loop(t_data data)
 			put_vars(&data.args, data.env);
 			if (!syntax_error(data.args))
 			{
-				//heredoc here
 				trim_quotes(&data.args);
 				data.redir = get_redir(&data.args);
 				if (data.args != NULL)
@@ -62,7 +61,6 @@ void	signal_handler(int signum)
 	{
 		rl_replace_line("", 0);
 		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
 		rl_redisplay();
 	}
 }

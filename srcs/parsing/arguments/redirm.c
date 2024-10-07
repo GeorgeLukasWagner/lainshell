@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   redirm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 16:23:03 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:21:11 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "args.h"
+#include <stdio.h>
 
 int	rm_redir(t_args *tmp)
 {
@@ -58,48 +59,6 @@ int	rm_redir2(t_args **args)
 	return (ret);
 }
 
-t_alt	*altnew(char *data, t_token token, size_t i)
-{
-	t_alt	*new;
-
-	new = malloc(sizeof(*new));
-	if (!new)
-		return (NULL);
-	new->data = data;
-	new->token = token;
-	new->exec = TRUE;
-	new->index = i;
-	new->next = NULL;
-	return (new);
-}
-
-t_alt	*ft_altlast(t_alt *head)
-{
-	t_alt	*tmp;
-
-	tmp = head;
-	while (tmp->next != NULL)
-		tmp = tmp->next;
-	return (tmp);
-}
-
-void	ft_altadd_back(t_alt **list, t_alt *new)
-{
-	t_alt	*n;
-
-	if (*list)
-	{
-		n = ft_altlast(*list);
-		n->next = new;
-		new->next = NULL;
-	}
-	else
-	{
-		*list = new;
-		(*list)->next = NULL;
-	}
-}
-
 void	re_redir(t_args *tmp, t_alt **redir, size_t i)
 {
 	t_alt	*new;
@@ -108,31 +67,32 @@ void	re_redir(t_args *tmp, t_alt **redir, size_t i)
 	ft_altadd_back(redir, new);
 }
 
-void	free_alt(t_alt **list)
+void	redir_helper(t_alt **redir, t_args **args, t_args *tmp, size_t i)
 {
-	t_alt	*head;
-	t_alt	*tmp;
+	int		ret;
 
-	head = *list;
-	while (head)
+	ret = 0;
+	while (tmp && tmp->next)
 	{
-		tmp = head;
-		head = head->next;
-		if (tmp->data)
-			free(tmp->data);
-		free(tmp);
-	}
-}
-
-void	print_redir(t_alt *redir)
-{
-	t_alt	*tmp;
-
-	tmp = redir;
-	while (tmp)
-	{
-		printf("redir: %s %d INDEX IS: %d\n", tmp->data, tmp->token, tmp->index);
-		tmp = tmp->next;
+		if (tmp->token == PIPE && tmp->next)
+			i++;
+		if (redircheck(tmp, 1))
+		{
+			re_redir(tmp->next, redir, i);
+			ret = rm_redir(tmp);
+			if (ret)
+				break ;
+		}
+		else if (redircheck(tmp, 2))
+		{
+			re_redir(tmp, redir, i);
+			ret = rm_redir2(&tmp);
+			*args = tmp;
+			if (ret || !tmp->next)
+				break ;
+		}
+		if (redircheck(tmp, 3))
+			tmp = tmp->next;
 	}
 }
 
@@ -141,36 +101,10 @@ t_alt	*get_redir(t_args **args)
 	t_args	*tmp;
 	t_alt	*redir;
 	size_t	i;
-	int		ret;
 
 	i = 0;
-	ret = 0;
 	redir = NULL;
 	tmp = *args;
-	while (tmp && tmp->next)
-	{
-		if (tmp->next->token == REDIR_OUT || tmp->next->token == REDIR_APPEND
-			|| tmp->next->token == REDIR_IN || tmp->next->token == HERE_DOC)
-		{
-			re_redir(tmp->next, &redir, i);
-			ret = rm_redir(tmp);
-			if (ret)
-				break ;
-		}
-		else if (tmp->token == REDIR_OUT || tmp->token == REDIR_APPEND
-			|| tmp->token == REDIR_IN || tmp->token == HERE_DOC)
-		{
-			re_redir(tmp, &redir, i);
-			ret = rm_redir2(&tmp);
-			*args = tmp;
-			if (ret || !tmp->next)
-				break ;
-		}
-		if (tmp->token == PIPE && tmp->next)
-			i++;
-		if (tmp->next->token != REDIR_OUT && tmp->next->token != REDIR_APPEND
-			&& tmp->next->token != REDIR_IN && tmp->next->token != HERE_DOC && tmp->next)
-			tmp = tmp->next;
-	}
+	redir_helper(&redir, args, tmp, i);
 	return (redir);
 }
