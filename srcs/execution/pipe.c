@@ -6,70 +6,35 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/06 16:10:48 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 12:55:32 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
 
-// static void	pipe_built(t_data **data, t_cmd *cmd, int *prev_fd, int index)
-// {
-// 	open_copy_fds(data);
-// 	if (*prev_fd != -1)
-// 	{
-// 		dup2(*prev_fd, 0);
-// 		close(*prev_fd);
-// 	}
-// 	if (cmd->next)
-// 		dup2((*data)->pipefd[1], 1);
-// 	exec_built_redir(data, cmd, index);
-// 	close((*data)->pipefd[0]);
-// 	close((*data)->pipefd[1]);
-// }
-
-static void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd)
+void	execute_pipeline_util(t_data **data, t_cmd **cmd,
+int *prev_fd, int index)
 {
-	if (*prev_fd != -1)
-		close(*prev_fd);
-	if (cmd->next)
+	if ((*cmd)->next && pipe((*data)->pipefd) == -1)
 	{
-		close((*data)->pipefd[1]);
-		*prev_fd = (*data)->pipefd[0];
+		perror("pipe");
+		exit(1);
 	}
 	else
 	{
-		close((*data)->pipefd[1]);
-		close((*data)->pipefd[0]);
-	}
-}
-
-static void child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index)
-{
-	if (*prev_fd != -1)
-	{
-		dup2(*prev_fd, 0);
-		close(*prev_fd);
-	}
-	if (cmd->next)
-		dup2((*data)->pipefd[1], 1);
-	close((*data)->pipefd[0]);
-	close((*data)->pipefd[1]);
-	if (is_a_built(cmd->argv) == TRUE)
-	{
-		exec_built_redir(data, cmd, index, 1);
-		exit((*data)->ecode);
-	}
-	else
-	{
-		print_redir((*data)->redir);
-		handle_redir(&(*data)->redir, index);
-		if (pathfinder((*data)->env, cmd->argv) == FALSE)
+		(*data)->pid = fork();
+		if ((*data)->pid == -1)
 		{
-			put_error((char *[]){cmd->argv[0], ": Command was not found\n", NULL});
-			exit(127);
+			perror("fork");
+			exit(1);
 		}
-		execute_cmd(data, cmd, index);
-		exit(0);
+		else if ((*data)->pid == 0)
+			child_process(data, *cmd, prev_fd, index);
+		else
+		{
+			(*data)->l_pid = (*data)->pid;
+			parent_process(data, *cmd, prev_fd);
+		}
 	}
 }
 
@@ -77,37 +42,14 @@ void	execute_pipeline(t_data *data, t_cmd *cmd)
 {
 	int		prev_fd;
 	int		index;
-	t_cmd	*cur;
-	pid_t	last_pid;
 
 	prev_fd = -1;
-	cur = cmd;
 	index = 0;
-	while (cur)
+	while (cmd)
 	{
-		if (cmd->next && pipe(data->pipefd) == -1)
-		{
-			perror("pipe");
-			exit(1);
-		}
-		else
-		{
-			data->pid = fork();
-			if (data->pid == -1)
-			{
-				perror("fork");
-				exit(1);
-			}
-			else if (data->pid == 0)
-				child_process(&data, cur, &prev_fd, index);
-			else
-			{
-				last_pid = data->pid;
-				parent_process(&data, cur, &prev_fd);
-			}
-		}
+		execute_pipeline_util(&data, &cmd, &prev_fd, index);
 		index++;
-		cur = cur->next;
+		cmd = cmd->next;
 	}
-	while (waitpid(-1, NULL, 0) > 0);
+	ft_waitpid(&data);
 }

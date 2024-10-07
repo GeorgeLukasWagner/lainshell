@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 02:21:51 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/30 11:04:28 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:35:45 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static void	delete_node_util(char *name, t_env *env)
 			delete = temp->next;
 			temp->next = temp2;
 			free_node(delete);
-			break;
+			break ;
 		}
 		temp = temp->next;
 	}

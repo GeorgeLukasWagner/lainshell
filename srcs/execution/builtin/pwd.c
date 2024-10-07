@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/30 11:03:13 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:35:57 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,19 @@ int	exec_built(t_cmd *cmd, t_data **data)
 		return (ft_unset(data, cmd));
 	if (ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])) == 0)
 		return (ft_env(data, cmd));
-	// if (ft_strncmp(cmd, "exit", ft_strlen(cmd)) == 0)
-	// 	//coming soon^^
-	return (-1);	
+	if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0)
+		ft_exit(data);
+	return (-1);
+}
+
+void	ft_exit(t_data **data)
+{
+	printf("exit\n");
+	clean_cmd(&(*data)->cmd);
+	free_cmd((*data)->cmd);
+	free_alt(&(*data)->redir);
+	free_list(&(*data)->args);
+	exit(0);
 }
 
 int	matrix_size(char **matrix)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 12:21:34 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 13:05:04 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,16 @@ void	ft_cmdadd_back(t_cmd **list, t_cmd *new);
 void	ft_altadd_back(t_alt **list, t_alt *new);
 t_alt	*altnew(char *data, t_token token, size_t i);
 int		redircheck(t_args *tmp, int i);
+void	ft_waitpid(t_data **data);
+void	ft_exit(t_data **data);
+void	print_export(t_env *env);
+void	print_exp_util(t_env *node);
+void	restore_printed(t_env *env);
+void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd);
+void	exec_pipe(t_data **data, int index, t_cmd **cmd);
+void	child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index);
+void	open_child(t_data **data, t_cmd **cur, int index, int *prev_fd);
+int		valid_name(char *arg);
+int		env_lstsize_exec(t_env *env);
 
 #endif

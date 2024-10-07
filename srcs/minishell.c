@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 12:56:11 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 13:05:22 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	lain_loop(t_data data)
 					data.cmd = make_cmd(data.args);
 					open_all_files(&data.redir);
 					exec(&data);
+					printf("EXIT CODE IS: %d\n", data.ecode);
 					clean_cmd(&data.cmd);
 					free_cmd(data.cmd);
 				}
@@ -84,6 +85,7 @@ int	main(int ac, char **av, char **envp)
 	data.pipefd[1] = -1;
 	data.fd[0] = -1;
 	data.fd[1] = -1;
+	data.ecode = 0;
 	init_signal();
 	lain_loop(data);
 }

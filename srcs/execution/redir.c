@@ -6,17 +6,17 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/06 16:21:58 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:20:54 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
-# define PIPE 1
-# define PARENT 0
+#define PIPE 1
+#define PARENT 0
 
 static void	in_redir(char *name)
 {
-	int fd;
+	int	fd;
 
 	fd = open(name, O_RDONLY);
 	printf("FD IS %d\n", fd);
@@ -96,7 +96,7 @@ void	handle_redir(t_alt **redir, int index)
 		temp = *redir;
 		while (temp && temp->index != index)
 			temp = temp->next;
-		while (temp && temp->index == index)	
+		while (temp && temp->index == index)
 		{
 			if (temp->token == REDIR_IN)
 				in_redir(temp->data);
@@ -108,52 +108,5 @@ void	handle_redir(t_alt **redir, int index)
 				heredoc_redir();
 			temp = temp->next;
 		}
-	}
-}
-
-void	open_copy_fds(t_data **data)
-{
-	(*data)->fd[0] = dup(0);
-	(*data)->fd[1] = dup(1);
-}
-
-void	close_copy_fds(t_data **data)
-{
-	close((*data)->fd[0]);
-	close((*data)->fd[1]);
-}
-
-void	exec_built_redir(t_data **data, t_cmd *cmd, int index, int type)
-{
-	t_alt	*temp;
-
-	if ((*data)->redir)
-	{
-		temp = (*data)->redir;
-		while (temp && temp->index != index)
-			temp = temp->next;
-		if (temp != NULL)
-		{
-			if ((*data)->redir)
-				if (check_redir_exec((*data)->redir, index) == FALSE)
-				{
-					close_copy_fds(data);
-					return ;
-				}
-			if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0)
-			{
-				close_copy_fds(data);
-				exec_built(cmd, data);
-			}
-			handle_redir(&(*data)->redir, index);
-		}
-	}
-	(*data)->ecode = exec_built(cmd, data);
-	if (type == PARENT)
-	{
-		if (dup2((*data)->fd[0], 0) == -1 || dup2((*data)->fd[1], 1) == -1)
-			perror("dup2");
-		close((*data)->fd[0]);
-		close((*data)->fd[1]);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 22:48:01 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/09/30 11:05:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:38:15 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ static int	change_dir(char *dir, t_data *data)
 		home_dir = ft_substr(home->data, 5, ft_strlen(home->data));
 		if (chdir(home_dir) == -1)
 		{
-			put_error((char *[]){"cd: ", home_dir, " is not a directory\n", NULL});
+			put_error((char *[]){"cd: ",
+				home_dir, " is not a directory\n", NULL});
 			free(home_dir);
 			return (1);
 		}
