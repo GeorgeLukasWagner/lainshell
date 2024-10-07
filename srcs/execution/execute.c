@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:00:41 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:06:17 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
