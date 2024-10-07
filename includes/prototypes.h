@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 16:00:51 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:23:52 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,7 @@ int		valid_name(char *arg);
 int		env_lstsize_exec(t_env *env);
 void	ft_close(int *fd);
 void	redir_error(t_data **data, int index);
+void	here_doc(t_alt *redir);
+void	execute_heredoc(t_alt **redir);
 
 #endif

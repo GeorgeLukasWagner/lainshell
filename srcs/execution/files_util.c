@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:58:08 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:16:40 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:36:14 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ static void	files_checker_append_heredoc(t_alt **cur)
 		}
 		ft_close(&fd);
 	}
-	// else if (cur->token == HERE_DOC)
-		// 	//here_doc execute;
 }
 
 static void	files_checker(t_alt **cur)
@@ -62,9 +60,23 @@ void	open_all_files(t_alt **redir)
 	t_alt	*cur;
 
 	cur = *redir;
+	execute_heredoc(redir);
 	while (cur)
 	{
 		files_checker(&cur);
 		cur = cur->next;
+	}
+}
+
+void	execute_heredoc(t_alt **redir)
+{
+	t_alt	*temp;
+
+	temp = *redir;
+	while (temp)
+	{
+		if (temp->token == HERE_DOC)
+			here_doc(temp);
+		temp = temp->next;
 	}
 }

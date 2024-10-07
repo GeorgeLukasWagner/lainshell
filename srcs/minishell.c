@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 15:41:01 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 17:36:27 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,10 @@ void	lain_loop(t_data data)
 			{
 				trim_quotes(&data.args);
 				data.redir = get_redir(&data.args);
+				open_all_files(&data.redir);
 				if (data.args != NULL)
 				{
 					data.cmd = make_cmd(data.args);
-					open_all_files(&data.redir);
 					ft_printcmd(data.cmd);
 					exec(&data);
 					clean_cmd(&data.cmd);

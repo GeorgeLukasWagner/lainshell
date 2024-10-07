@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:12:00 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:19:31 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	heredoc_redir(void)
 {
 	int	fd;
 
-	fd = open(".heredoc", O_RDONLY);
+	fd = open("/tmp/.heredoc", O_RDONLY);
 	if (fd == -1)
 	{
 		ft_putstr_fd("Cannot access heredoc\n", 2);
