@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/03 20:27:02 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 10:26:47 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_data
 	int		pipefd[2];
 	int		fd[2];
 	int		ecode;
+	int		l_pid;
 }	t_data;
 
 #endif

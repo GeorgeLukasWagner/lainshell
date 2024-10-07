@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 16:23:59 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/06 18:07:38 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	lain_loop(t_data data)
 					data.cmd = make_cmd(data.args);
 					open_all_files(&data.redir);
 					exec(&data);
+					printf("EXIT CODE IS: %d\n", data.ecode);
 					clean_cmd(&data.cmd);
 					free_cmd(data.cmd);
 				}
@@ -85,6 +86,7 @@ int	main(int ac, char **av, char **envp)
 	data.pipefd[1] = -1;
 	data.fd[0] = -1;
 	data.fd[1] = -1;
+	data.ecode = 0;
 	init_signal();
 	lain_loop(data);
 }

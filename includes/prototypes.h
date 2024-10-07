@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 16:19:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:02:02 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,5 +80,16 @@ int		check_redir_exec(t_alt *redir, int index);
 int		is_a_built(char **argv);
 void	open_copy_fds(t_data **data);
 void	close_copy_fds(t_data **data);
+void	ft_waitpid(t_data **data);
+void	ft_exit(t_data **data);
+void	print_export(t_env *env);
+void	print_exp_util(t_env *node);
+void	restore_printed(t_env *env);
+void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd);
+void	exec_pipe(t_data **data, int index, t_cmd **cmd);
+void	child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index);
+void	open_child(t_data **data, t_cmd **cur, int index, int *prev_fd);
+int		valid_name(char *arg);
+int		env_lstsize_exec(t_env *env);
 
 #endif
