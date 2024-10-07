@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:55:59 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 11:57:00 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:49:14 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,26 @@
 void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd)
 {
 	if (*prev_fd != -1)
-		close(*prev_fd);
+		ft_close(prev_fd);
 	if (cmd->next)
 	{
-		close((*data)->pipefd[1]);
+		ft_close(&(*data)->pipefd[1]);
 		*prev_fd = (*data)->pipefd[0];
 	}
 	else
 	{
-		close((*data)->pipefd[1]);
-		close((*data)->pipefd[0]);
+		ft_close(&(*data)->pipefd[1]);
+		ft_close(&(*data)->pipefd[0]);
 	}
 }
 
 void	exec_pipe(t_data **data, int index, t_cmd **cmd)
 {
-	print_redir((*data)->redir);
+	if (check_redir_exec((*data)->redir, index) == FALSE)
+	{
+		redir_error(data, index);
+		exit(1);
+	}
 	handle_redir(&(*data)->redir, index);
 	if (pathfinder((*data)->env, (*cmd)->argv) == FALSE)
 	{
@@ -47,12 +51,12 @@ void	child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index)
 	if (*prev_fd != -1)
 	{
 		dup2(*prev_fd, 0);
-		close(*prev_fd);
+		ft_close(prev_fd);
 	}
 	if (cmd->next)
 		dup2((*data)->pipefd[1], 1);
-	close((*data)->pipefd[0]);
-	close((*data)->pipefd[1]);
+	ft_close(&(*data)->pipefd[0]);
+	ft_close(&(*data)->pipefd[1]);
 	if (is_a_built(cmd->argv) == TRUE)
 	{
 		exec_built_redir(data, cmd, index, 1);

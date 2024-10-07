@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 10:20:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:00:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:27:03 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	open_copy_fds(t_data **data)
 
 void	close_copy_fds(t_data **data)
 {
-	close((*data)->fd[0]);
-	close((*data)->fd[1]);
+	ft_close(&(*data)->fd[0]);
+	ft_close(&(*data)->fd[1]);
 }
 
 static void	exec_built_util(t_data **data, int index, t_cmd **cmd)
@@ -61,8 +61,8 @@ void	exec_built_redir(t_data **data, t_cmd *cmd, int index, int type)
 	{
 		if (dup2((*data)->fd[0], 0) == -1 || dup2((*data)->fd[1], 1) == -1)
 			perror("dup2");
-		close((*data)->fd[0]);
-		close((*data)->fd[1]);
+		ft_close(&(*data)->fd[0]);
+		ft_close(&(*data)->fd[1]);
 	}
 }
 
@@ -76,7 +76,7 @@ int	check_redir_exec(t_alt *redir, int index)
 	while (cur && cur->index == index)
 	{
 		if (cur->exec == FALSE)
-			exit(1);
+			return (FALSE);
 		cur = cur->next;
 	}
 	return (TRUE);

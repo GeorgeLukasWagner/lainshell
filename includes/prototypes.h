@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 13:19:52 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 16:00:51 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ void	child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index);
 void	open_child(t_data **data, t_cmd **cur, int index, int *prev_fd);
 int		valid_name(char *arg);
 int		env_lstsize_exec(t_env *env);
+void	ft_close(int *fd);
+void	redir_error(t_data **data, int index);
 
 #endif
