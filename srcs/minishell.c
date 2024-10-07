@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 12:07:55 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 12:56:11 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ void	signal_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		rl_replace_line("", 0);
 		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
