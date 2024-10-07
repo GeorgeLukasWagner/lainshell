@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 10:20:54 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:12:00 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ static void	in_redir(char *name)
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director1\n", NULL});
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 0) == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
-	close(fd);
+	ft_close(&fd);
 }
 
 static void	out_redir(char *name)
@@ -41,14 +41,14 @@ static void	out_redir(char *name)
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 1) == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
-	close(fd);
+	ft_close(&fd);
 }
 
 static void	append_redir(char *name)
@@ -59,14 +59,14 @@ static void	append_redir(char *name)
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 1) == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director\n", NULL});
-		exit(1);
+		return ;
 	}
-	close(fd);
+	ft_close(&fd);
 }
 
 static void	heredoc_redir(void)
@@ -77,14 +77,14 @@ static void	heredoc_redir(void)
 	if (fd == -1)
 	{
 		ft_putstr_fd("Cannot access heredoc\n", 2);
-		exit(1);
+		return ;
 	}
 	if (dup2(fd, 0) == -1)
 	{
 		ft_putstr_fd("heredoc: No such a file or a directory\n", 2);
-		exit(1);
+		return ;
 	}
-	close(fd);
+	ft_close(&fd);
 }
 
 void	handle_redir(t_alt **redir, int index)

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:58:08 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 12:59:02 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:16:40 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	files_checker_append_heredoc(t_alt **cur)
 				": No such a file or a director\n", NULL});
 			(*cur)->exec = FALSE;
 		}
-		close(fd);
+		ft_close(&fd);
 	}
 	// else if (cur->token == HERE_DOC)
 		// 	//here_doc execute;
@@ -40,7 +40,7 @@ static void	files_checker(t_alt **cur)
 		fd = open((*cur)->data, O_RDONLY);
 		if (fd == -1)
 			(*cur)->exec = FALSE;
-		close(fd);
+		ft_close(&fd);
 	}
 	else if ((*cur)->token == REDIR_OUT)
 	{
@@ -51,7 +51,7 @@ static void	files_checker(t_alt **cur)
 				": No such a file or a directory\n", NULL});
 			(*cur)->exec = FALSE;
 		}
-		close(fd);
+		ft_close(&fd);
 	}
 	else if ((*cur)->token == REDIR_APPEND || (*cur)->token == HERE_DOC)
 		files_checker_append_heredoc(cur);
