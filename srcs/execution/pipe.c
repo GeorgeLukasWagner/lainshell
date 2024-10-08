@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 11:36:23 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 12:55:32 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:16:27 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,14 @@ void	execute_pipeline(t_data *data, t_cmd *cmd)
 
 	prev_fd = -1;
 	index = 0;
+	int i = 0;
 	while (cmd)
 	{
-		execute_pipeline_util(&data, &cmd, &prev_fd, index);
+		if (cmd->argv != NULL)
+		{
+			printf("%d %s\n", i++, cmd->argv[0]);
+			execute_pipeline_util(&data, &cmd, &prev_fd, index);
+		}
 		index++;
 		cmd = cmd->next;
 	}

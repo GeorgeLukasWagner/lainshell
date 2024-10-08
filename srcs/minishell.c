@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 17:25:12 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 20:12:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	lain_loop(t_data data)
 				if (data.args != NULL && is_valid(data.args))
 				{
 					data.cmd = make_cmd(data.args);
+					// ft_printcmd(data.cmd);
 					exec(&data);
 					clean_cmd(&data.cmd);
 					free_cmd(data.cmd);
