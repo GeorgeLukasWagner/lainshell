@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:41:50 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 17:50:47 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:11:15 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	syntax_error(t_args *list)
 		return (1);
 	while (tmp->next)
 	{
-		if (tmp->token > 3 && tmp->next->token > 4)
+		if (tmp->token > 3 && tmp->next->token > 4 && tmp->next->token != 7)
 		{
 			printf("lainshell: syntax error near unexpected token '%s'\n",
 				tmp->next->data);

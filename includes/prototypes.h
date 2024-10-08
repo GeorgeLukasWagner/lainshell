@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 17:27:01 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 16:11:05 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,7 @@ int		env_lstsize_exec(t_env *env);
 void	ft_close(int *fd);
 void	redir_error(t_data **data, int index);
 void	put_exit_code(t_args **list, size_t i, int ecode);
+void	here_doc(t_alt *redir);
+void	execute_heredoc(t_alt **redir);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 22:48:01 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/06 18:38:15 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/07 17:07:30 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	update_dir(t_data *data)
 	}
 	e_pwd = find_node("PWD=", data->env);
 	pwd = ft_substr(e_pwd->data, 3, ft_strlen(e_pwd->data));
-	swap_env(data->env, "OLDPWD=", "PWD");
+	swap_env(data->env, "OLDPWD=", e_pwd->data + 4);
 	swap_env(data->env, "PWD=", temp);
 	free(temp);
 	free(pwd);
