@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:04:47 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/17 13:25:56 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 20:15:34 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ char	**clean_argv(char **argv)
 			cmd[j++] = ft_strdup(argv[i]);
 		i++;
 	}
-	ft_free(argv);
+	if (argv)
+		ft_free(argv);
 	return (cmd);
 }
 
