@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:12:18 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 20:23:16 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 20:40:39 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	**vecdup(char **argv, size_t len)
 	i = 0;
 	if (!argv)
 		return (NULL);
-	new = ft_calloc(sizeof(char *), len);
+	new = ft_calloc(sizeof(char *), len + 1);
 	if (!new)
 		return (NULL);
 	while (argv[i])

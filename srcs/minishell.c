@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 20:30:13 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:54:31 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,19 +74,35 @@ void	lain_loop(t_data data)
 
 void	signal_handler(int signum)
 {
-	if (signum == SIGINT)
+	if (signum == SIGCHLD)
+		g_signum = SIGCHLD;
+	else if (signum == SIGINT)
 	{
-		ft_putstr_fd("\n", 1);
+		write(1, "\n", 1);
+		wait(NULL);
+		if (g_signum == SIGCHLD)
+		{
+			g_signum = 0;
+			return ;
+		}
 		rl_on_new_line();
 		rl_replace_line("", 0);
 		rl_redisplay();
+		g_signum = 0;
 	}
 }
 
 void	init_signal(void)
 {
-	signal(SIGINT, signal_handler);
+	struct sigaction	sa;
+
+	sa.sa_handler = signal_handler;
+	sa.sa_flags = SA_RESTART;
+	sigemptyset(&sa.sa_mask);
+	sigaction(SIGINT, &sa, NULL);
+	sigaction(SIGCHLD, &sa, NULL);
 	signal(SIGQUIT, SIG_IGN);
+	sigaction(SIGTSTP, &sa, NULL);
 }
 
 int	main(int ac, char **av, char **envp)

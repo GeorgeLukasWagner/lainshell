@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/10/07 17:27:23 by gwagner          ###   ########.fr        #
+#    Updated: 2024/10/08 20:59:02 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,5 +73,8 @@ re:				fclean all
 
 lain:			
 				@firefox https://www.youtube.com/watch?v=MM8RufZr5lw
+
+runb: all
+	valgrind --leak-check=full ./lainshell 
 
 .PHONY:			all clean fclean re
