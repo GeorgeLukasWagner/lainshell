@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 13:26:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 17:19:31 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:39:45 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static void	in_redir(char *name)
 	int	fd;
 
 	fd = open(name, O_RDONLY);
-	printf("FD IS %d\n", fd);
 	if (fd == -1)
 	{
 		put_error((char *[]){name, ": No such a file or a director1\n", NULL});

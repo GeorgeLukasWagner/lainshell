@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:55:59 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 15:49:14 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 19:39:34 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_waitpid(t_data **data)
 	{
 		if (WIFEXITED(status))
 		{
-			printf("Ecode before putting into struct: %d\n", WIFEXITED(status));
+			//printf("Ecode before putting into struct: %d\n", WIFEXITED(status));
 			(*data)->ecode = WIFEXITED(status);
 		}
 	}
