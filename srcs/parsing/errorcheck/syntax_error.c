@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 15:41:50 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 18:28:23 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/07 19:06:22 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int	syntax_error(t_args *list)
 		return (1);
 	while (tmp->next)
 	{
-		if (tmp->token > 3 && tmp->next->token > 4)
+		if (tmp->token > 3 && tmp->next->token > 4 && tmp->next->token != 7)
 		{
 			printf("lainshell: syntax error near unexpected token '%s'\n",
 				tmp->next->data);
