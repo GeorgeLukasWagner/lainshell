@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 17:25:12 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 20:26:55 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	lain_loop(t_data data)
 				if (data.args != NULL && is_valid(data.args))
 				{
 					data.cmd = make_cmd(data.args);
-					exec(&data);
 					clean_cmd(&data.cmd);
+					exec(&data);
 					free_cmd(data.cmd);
 				}
 				free_alt(&data.redir);

@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:12:18 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 20:12:44 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 20:23:16 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	**vecdup(char **argv, size_t len)
 	size_t	i;
 
 	i = 0;
+	if (!argv)
+		return (NULL);
 	new = ft_calloc(sizeof(char *), len);
 	if (!new)
 		return (NULL);

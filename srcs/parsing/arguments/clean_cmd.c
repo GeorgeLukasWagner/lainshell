@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 13:04:47 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 20:15:34 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/08 20:28:44 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ size_t	check_elem(char **argv)
 
 	len = 0;
 	i = 0;
+	if (!argv || argv[0] == NULL)
+		return (0);
 	while (argv[i])
 	{
 		if (argv[i][0] != '\0')
@@ -58,7 +60,8 @@ void	clean_cmd(t_cmd **cmd)
 	tmp = *cmd;
 	while (tmp)
 	{
-		tmp->argv = clean_argv(tmp->argv);
+		if (tmp->argv)
+			tmp->argv = clean_argv(tmp->argv);
 		tmp = tmp->next;
 	}
 }
