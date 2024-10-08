@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:55:59 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 15:49:14 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 20:07:39 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd)
 {
 	if (*prev_fd != -1)
 		ft_close(prev_fd);
-	if (cmd->next)
+	if (cmd->next && cmd->next->argv)
 	{
 		ft_close(&(*data)->pipefd[1]);
 		*prev_fd = (*data)->pipefd[0];
@@ -53,7 +53,7 @@ void	child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index)
 		dup2(*prev_fd, 0);
 		ft_close(prev_fd);
 	}
-	if (cmd->next)
+	if (cmd->next && cmd->next->argv)
 		dup2((*data)->pipefd[1], 1);
 	ft_close(&(*data)->pipefd[0]);
 	ft_close(&(*data)->pipefd[1]);
@@ -74,7 +74,7 @@ void	ft_waitpid(t_data **data)
 	{
 		if (WIFEXITED(status))
 		{
-			printf("Ecode before putting into struct: %d\n", WIFEXITED(status));
+			//printf("Ecode before putting into struct: %d\n", WIFEXITED(status));
 			(*data)->ecode = WIFEXITED(status);
 		}
 	}
