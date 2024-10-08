@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:58:08 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 17:36:14 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 16:36:48 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ void	execute_heredoc(t_alt **redir)
 	while (temp)
 	{
 		if (temp->token == HERE_DOC)
+		{
 			here_doc(temp);
+		}
 		temp = temp->next;
 	}
 }

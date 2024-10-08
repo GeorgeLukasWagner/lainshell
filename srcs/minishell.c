@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 17:38:12 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/08 17:25:12 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,25 @@ int	g_signum = 0;
 
 void	exit_lain(t_data data)
 {
+	printf("exit\n");
 	free_env(&data.env);
 	exit(0);
+}
+
+int		is_valid(t_args *list)
+{
+	t_args	*tmp;
+	int		i;
+
+	i = 0;
+	tmp = list;
+	while (tmp)
+	{
+		if (tmp->token != PIPE)
+			i = 1;
+		tmp = tmp->next;
+	}
+	return (i);
 }
 
 void	lain_loop(t_data data)
@@ -40,10 +57,9 @@ void	lain_loop(t_data data)
 				trim_quotes(&data.args);
 				data.redir = get_redir(&data.args);
 				open_all_files(&data.redir);
-				if (data.args != NULL)
+				if (data.args != NULL && is_valid(data.args))
 				{
 					data.cmd = make_cmd(data.args);
-					ft_printcmd(data.cmd);
 					exec(&data);
 					clean_cmd(&data.cmd);
 					free_cmd(data.cmd);
