@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 16:11:05 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 13:25:18 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	free_alt(t_alt **list);
 void	print_redir(t_alt *redir);
 void	execute_pipeline(t_data *data, t_cmd *cmd);
 void	exec(t_data *data);
-void	open_all_files(t_alt **redir);
+void	open_all_files(t_alt **redir, t_data *data);
 int		check_redir_exec(t_alt *redir, int index);
 int		is_a_built(char **argv);
 void	open_copy_fds(t_data **data);
@@ -101,5 +101,6 @@ void	redir_error(t_data **data, int index);
 void	put_exit_code(t_args **list, size_t i, int ecode);
 void	here_doc(t_alt *redir);
 void	execute_heredoc(t_alt **redir);
+void	ft_error_file(t_data *data, char *name);
 
 #endif

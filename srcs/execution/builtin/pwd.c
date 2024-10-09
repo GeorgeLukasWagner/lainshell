@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/06 18:35:57 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/09 13:29:05 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	exec_built(t_cmd *cmd, t_data **data)
 
 void	ft_exit(t_data **data)
 {
+	
 	printf("exit\n");
 	clean_cmd(&(*data)->cmd);
 	free_cmd((*data)->cmd);

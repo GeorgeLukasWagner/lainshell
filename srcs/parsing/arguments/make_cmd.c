@@ -6,7 +6,7 @@
 /*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 10:20:06 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/08 20:08:34 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 13:14:24 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,10 @@ t_cmd	*make_cmd(t_args *args)
 	{
 		argv = make_argv(&tmp);
 		ft_cmdadd_back(&cmd, ft_cmdnew(argv, cmd_len(args) + 1));
-		if (tmp && tmp->next)
-			tmp = tmp->next;
 		ft_free(argv);
+		if (!tmp || !tmp->next)
+			break ;
+		tmp = tmp->next;
 	}
 	return (cmd);
 }

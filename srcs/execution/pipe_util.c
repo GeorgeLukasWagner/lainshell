@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:55:59 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/08 20:07:39 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/09 12:53:55 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exec.h"
+#include <sys/wait.h>
 
 void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd)
 {
@@ -75,7 +76,7 @@ void	ft_waitpid(t_data **data)
 		if (WIFEXITED(status))
 		{
 			//printf("Ecode before putting into struct: %d\n", WIFEXITED(status));
-			(*data)->ecode = WIFEXITED(status);
+			(*data)->ecode = WEXITSTATUS(status);
 		}
 	}
 }
