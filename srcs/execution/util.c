@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   util.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/09 15:55:53 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/08 16:37:12 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:06:08 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	here_doc(t_alt *redir)
 	{
 		tmp_storage = readline("heredoc > ");
 		if (!tmp_storage ||
-			ft_strcmp(tmp_storage, delim) == 0)
+			ft_strncmp(tmp_storage, delim, ft_strlen(tmp_storage)) == 0)
 		{
 			if (tmp_storage)
 				free(tmp_storage);

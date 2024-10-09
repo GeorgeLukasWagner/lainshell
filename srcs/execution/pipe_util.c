@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_util.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 11:55:59 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/09 12:53:55 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 15:41:38 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	parent_process(t_data **data, t_cmd *cmd, int *prev_fd)
 {
 	if (*prev_fd != -1)
 		ft_close(prev_fd);
-	if (cmd->next && cmd->next->argv)
+	if (cmd->next)
 	{
 		ft_close(&(*data)->pipefd[1]);
 		*prev_fd = (*data)->pipefd[0];
@@ -54,7 +54,7 @@ void	child_process(t_data **data, t_cmd *cmd, int *prev_fd, int index)
 		dup2(*prev_fd, 0);
 		ft_close(prev_fd);
 	}
-	if (cmd->next && cmd->next->argv)
+	if (cmd->next)
 		dup2((*data)->pipefd[1], 1);
 	ft_close(&(*data)->pipefd[0]);
 	ft_close(&(*data)->pipefd[1]);
@@ -74,10 +74,7 @@ void	ft_waitpid(t_data **data)
 	while (waitpid(-1, &status, 0) > 0)
 	{
 		if (WIFEXITED(status))
-		{
-			//printf("Ecode before putting into struct: %d\n", WIFEXITED(status));
 			(*data)->ecode = WEXITSTATUS(status);
-		}
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/09 13:29:05 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:55:57 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,19 +27,53 @@ int	exec_built(t_cmd *cmd, t_data **data)
 	if (ft_strncmp(cmd->argv[0], "env", ft_strlen(cmd->argv[0])) == 0)
 		return (ft_env(data, cmd));
 	if (ft_strncmp(cmd->argv[0], "exit", ft_strlen(cmd->argv[0])) == 0)
-		ft_exit(data);
+		return (ft_exit(data, cmd->argv));
 	return (-1);
 }
 
-void	ft_exit(t_data **data)
+static int	check_num(char **argv)
 {
-	
+	int	i;
+	int	j;
+
+	i = 1;
+	while (argv[i])
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			if (!ft_isdigit(argv[i][j]))
+				return (FALSE);
+			j++;
+		}
+		i++;
+	}
+	return (TRUE);
+}
+
+int	ft_exit(t_data **data, char **argv)
+{
+	int	ecode;
+
+	ecode = 0;
+	if (check_num(argv) == FALSE)
+	{
+		printf("minishell: numeric argument required\n");
+		ecode = 2;
+	}
+	else if (matrix_size(argv) > 2)
+	{
+		printf("minishell: too many arguments\n");
+		return(1);
+	}
+	else if (matrix_size(argv) == 2)
+		ecode = atoi(argv[1]);
 	printf("exit\n");
 	clean_cmd(&(*data)->cmd);
 	free_cmd((*data)->cmd);
 	free_alt(&(*data)->redir);
 	free_list(&(*data)->args);
-	exit(0);
+	exit(ecode);
 }
 
 int	matrix_size(char **matrix)

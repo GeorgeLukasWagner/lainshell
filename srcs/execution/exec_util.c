@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 10:20:28 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 13:27:03 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/09 14:54:13 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void	exec_built_util(t_data **data, int index, t_cmd **cmd)
 	if (ft_strncmp((*cmd)->argv[0], "exit", ft_strlen((*cmd)->argv[0])) == 0)
 	{
 		close_copy_fds(data);
-		exec_built(*cmd, data);
+		(*data)->ecode = exec_built(*cmd, data);
 	}
 	handle_redir(&(*data)->redir, index);
 }

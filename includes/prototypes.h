@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/09 13:25:18 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 14:52:30 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	ft_altadd_back(t_alt **list, t_alt *new);
 t_alt	*altnew(char *data, t_token token, size_t i);
 int		redircheck(t_args *tmp, int i);
 void	ft_waitpid(t_data **data);
-void	ft_exit(t_data **data);
+int		ft_exit(t_data **data, char **argv);
 void	print_export(t_env *env);
 void	print_exp_util(t_env *node);
 void	restore_printed(t_env *env);

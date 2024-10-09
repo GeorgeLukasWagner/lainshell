@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirm.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 12:21:11 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 16:15:42 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	redir_helper(t_alt **redir, t_args **args, t_args *tmp, size_t i)
 
 	ret = 0;
 	while (tmp && tmp->next)
-	{
+	{	
 		if (tmp->token == PIPE && tmp->next)
 			i++;
 		if (redircheck(tmp, 1))
@@ -91,7 +91,7 @@ void	redir_helper(t_alt **redir, t_args **args, t_args *tmp, size_t i)
 			if (ret || !tmp->next)
 				break ;
 		}
-		if (redircheck(tmp, 3))
+		if (redircheck(tmp, 3) && !redircheck(tmp, 2))
 			tmp = tmp->next;
 	}
 }

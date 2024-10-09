@@ -6,7 +6,7 @@
 #    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/10/08 20:59:02 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/10/09 18:14:45 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,6 +75,6 @@ lain:
 				@firefox https://www.youtube.com/watch?v=MM8RufZr5lw
 
 runb: all
-	valgrind --leak-check=full ./lainshell 
+	valgrind --leak-check=full ./minishell
 
 .PHONY:			all clean fclean re

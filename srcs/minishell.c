@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/09 13:23:11 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/09 18:13:37 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	lain_loop(t_data data)
 	while (1)
 	{
 		lain = readline("\033[1;32mlainshell:\033[0m ");
+		// lain = readline("minishell$ ");
 		if (!lain)
 			exit_lain(data);
 		if (lain[0] != '\0')
