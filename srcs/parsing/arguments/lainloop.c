@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   lainloop.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:53:41 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/10 16:56:20 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/10 17:25:06 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "args.h"
 
-void	exit_lain(t_data data)
+void	exit_lain(t_data data, char *lain)
 {
+	if (lain)
+		free(lain);
 	printf("exit\n");
 	free_env(&data.env);
 	exit(0);
@@ -59,7 +61,7 @@ void	lain_loop(t_data data)
 	{
 		lain = readline("\033[1;32mlainshell:\033[0m ");
 		if (!lain)
-			exit_lain(data);
+			exit_lain(data, lain);
 		if (lain[0] != '\0')
 		{
 			add_history(lain);
@@ -72,3 +74,5 @@ void	lain_loop(t_data data)
 		free(lain);
 	}
 }
+
+//for beqa's tester prompt: lain = readline("minishell$ ");
