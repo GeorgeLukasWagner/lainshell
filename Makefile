@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
+#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/10/10 16:43:19 by hzakharc         ###   ########.fr        #
+#    Updated: 2024/10/10 16:55:44 by gwagner          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ ERR_DIR 		=	$(PARSE_DIR)errorcheck/
 BUILT_DIR		=	$(EXEC_DIR)builtin/
 
 MAIN_SRC		=	$(SRC_DIR)minishell.c
-ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c argor.c var2.c make_cmd.c clean_cmd.c redirm.c cmd_utils.c redir_utils.c some_funcs.c var_helper.c
+ARGS_SRC		=	split_args.c put_args.c parse_utils.c arglist01.c arglist02.c enviroment01.c enviroment02.c variables.c argor.c var2.c make_cmd.c clean_cmd.c redirm.c cmd_utils.c redir_utils.c some_funcs.c var_helper.c lainloop.c
 ERR_SRC			=	syntax_error.c
 EXEC_SRC		=	path.c execute.c util.c redir.c pipe.c exec_util.c pipe_util.c exec_util2.c files_util.c
 BUILT_SRC		=	pwd.c env.c export.c unset.c echo.c cd.c export_util.c cd_util.c pwd_util.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prototypes.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
+/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:00 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/10 16:44:19 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:55:08 by gwagner          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,6 @@ void	execute_heredoc(t_alt **redir, t_data *data);
 void	ft_error_file(t_data *data, char *name);
 void	swap_env(t_env *env, char *src, char *to_change);
 void	update_dir(t_data *data);
+void	lain_loop(t_data data);
 
 #endif
