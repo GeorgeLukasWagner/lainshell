@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 10:21:54 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/09 13:19:16 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/10 16:00:22 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef struct s_data
 	int		ecode;
 	int		l_pid;
 	int		error_file;
+	int		here_doc_fd;
 }	t_data;
 
 #endif

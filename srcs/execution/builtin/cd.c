@@ -6,43 +6,11 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 22:48:01 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 17:07:30 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:20:18 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
-
-static void	swap_env(t_env *env, char *src, char *to_change)
-{
-	t_env	*temp;
-	char	*res;
-
-	temp = find_node(src, env);
-	free(temp->data);
-	res = ft_strjoin(src, to_change);
-	temp->data = ft_strdup(res);
-	free(res);
-}
-
-static void	update_dir(t_data *data)
-{
-	char	*temp;
-	char	*pwd;
-	t_env	*e_pwd;
-
-	temp = getcwd(NULL, 0);
-	if (!temp)
-	{
-		perror("getcwd");
-		return ;
-	}
-	e_pwd = find_node("PWD=", data->env);
-	pwd = ft_substr(e_pwd->data, 3, ft_strlen(e_pwd->data));
-	swap_env(data->env, "OLDPWD=", e_pwd->data + 4);
-	swap_env(data->env, "PWD=", temp);
-	free(temp);
-	free(pwd);
-}
 
 static int	change_dir(char *dir, t_data *data)
 {
@@ -71,15 +39,46 @@ static int	change_dir(char *dir, t_data *data)
 	return (0);
 }
 
-int	ft_cd(t_data **data, t_cmd *cmd)
+static int	check_env_cd(t_env **env)
 {
-	t_env	*home;
+	t_env	*pwd;
+	t_env	*oldpwd;
 
+	pwd = NULL;
+	oldpwd = NULL;
+	pwd = find_node("PWD=", *env);
+	oldpwd = find_node("OLDPWD=", *env);
+	if (!pwd || !oldpwd)
+		return (FALSE);
+	return (TRUE);
+}
+
+static int	cd_checker(t_data **data, t_cmd *cmd)
+{
+	if (check_env_cd(&(*data)->env) == FALSE)
+	{
+		put_error((char *[]){"why u unseted pwd or oldpwd fuck you\n", NULL});
+		return (1);
+	}
 	if (matrix_size(cmd->argv) >= 3)
 	{
 		put_error((char *[]){"cd: Too many arguments\n", NULL});
 		return (1);
 	}
+	else
+	{
+		if (change_dir(cmd->argv[1], *data) == 1)
+			return (1);
+	}
+	return (0);
+}
+
+int	ft_cd(t_data **data, t_cmd *cmd)
+{
+	t_env	*home;
+
+	if (cd_checker(data, cmd) == 1)
+		return (1);
 	if (matrix_size(cmd->argv) == 1)
 	{
 		home = find_node("HOME=", (*data)->env);
@@ -89,11 +88,6 @@ int	ft_cd(t_data **data, t_cmd *cmd)
 			return (1);
 		}
 		if (change_dir(NULL, *data) == 1)
-			return (1);
-	}
-	else
-	{
-		if (change_dir(cmd->argv[1], *data) == 1)
 			return (1);
 	}
 	update_dir(*data);

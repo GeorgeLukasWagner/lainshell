@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:48:27 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 15:59:16 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:15:53 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	echo_util(int *nl, t_cmd *cmd, int i)
 			while (is_flag(cmd->argv[i]) == FALSE)
 				i++;
 			*nl = TRUE;
-		}	
+		}
 	}
 	while (cmd->argv[i] != NULL)
 	{

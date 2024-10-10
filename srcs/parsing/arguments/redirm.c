@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 14:16:24 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/09 16:15:42 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:15:36 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	redir_helper(t_alt **redir, t_args **args, t_args *tmp, size_t i)
 
 	ret = 0;
 	while (tmp && tmp->next)
-	{	
+	{
 		if (tmp->token == PIPE && tmp->next)
 			i++;
 		if (redircheck(tmp, 1))

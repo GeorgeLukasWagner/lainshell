@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/09 14:55:57 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:42:57 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	ft_exit(t_data **data, char **argv)
 	else if (matrix_size(argv) > 2)
 	{
 		printf("minishell: too many arguments\n");
-		return(1);
+		return (1);
 	}
 	else if (matrix_size(argv) == 2)
 		ecode = atoi(argv[1]);
@@ -92,22 +92,15 @@ int	ft_pwd(t_data **data)
 	t_env	*node;
 
 	node = find_node("PWD=", (*data)->env);
+	pwd = NULL;
+	if (!node)
+	{
+		printf("%s\n", getcwd(pwd, 1024));
+		free(pwd);
+		return (0);
+	}
 	pwd = ft_substr(node->data, 4, ft_strlen(node->data));
 	printf("%s\n", pwd);
 	free(pwd);
 	return (0);
-}
-
-t_env	*find_node(const char *to_find, t_env *env)
-{
-	t_env	*temp;
-
-	temp = env;
-	while (temp)
-	{
-		if (ft_strncmp(temp->data, to_find, ft_strlen(to_find)) == 0)
-			return (temp);
-		temp = temp->next;
-	}
-	return (NULL);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   files_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:58:08 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/09 13:26:30 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/10 16:41:32 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_error_file(t_data *data, char *name)
 	if (data->error_file == 0)
 	{
 		put_error((char *[]){name,
-				": No such a file or a directory\n", NULL});;
+			": No such a file or a directory\n", NULL});
 		data->error_file = 1;
 	}
 }
@@ -71,7 +71,7 @@ void	open_all_files(t_alt **redir, t_data *data)
 	t_alt	*cur;
 
 	cur = *redir;
-	execute_heredoc(redir);
+	execute_heredoc(redir, data);
 	while (cur)
 	{
 		files_checker(&cur, data);
@@ -79,17 +79,26 @@ void	open_all_files(t_alt **redir, t_data *data)
 	}
 }
 
-void	execute_heredoc(t_alt **redir)
+void	execute_heredoc(t_alt **redir, t_data *data)
 {
 	t_alt	*temp;
+	pid_t	pid;
 
 	temp = *redir;
 	while (temp)
 	{
 		if (temp->token == HERE_DOC)
 		{
-			here_doc(temp);
+			pid = fork();
+			if (pid == -1)
+			{
+				perror("fork");
+				return ;
+			}
+			if (pid == 0)
+				here_doc(temp, data);
 		}
 		temp = temp->next;
 	}
+	wait(NULL);
 }

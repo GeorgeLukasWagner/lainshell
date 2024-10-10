@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/08 16:45:12 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 17:07:37 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/10 16:31:34 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	execute_util(t_data *data, t_cmd *cmd, int index)
 	if (data->redir)
 	{
 		if (check_redir_exec(data->redir, index) == FALSE)
-			return(redir_error(&data, index));
+			return (redir_error(&data, index));
 	}
 	data->pid = fork();
 	if (data->pid == -1)

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/03 14:37:58 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 12:29:09 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:30:55 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,17 +67,18 @@ int	pathfinder(t_env *env, char **args)
 	if (access(args[0], X_OK) == 0)
 		return (TRUE);
 	src = find_node("PATH=", env);
+	if (!src)
+		return (FALSE);
 	to_find = ft_split(src->data, ':');
 	pathfinder_util(to_find, args);
 	i = 0;
-	while (to_find[i] != NULL)
+	while (to_find[++i] != NULL)
 	{
 		path = ft_strjoin(to_find[i], args[0]);
 		if (access(path, X_OK) == 0)
 			break ;
 		free(path);
 		path = NULL;
-		i++;
 	}
 	free_matrix(to_find);
 	return_path(path, args);

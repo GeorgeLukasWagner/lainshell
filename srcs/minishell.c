@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/18 13:35:12 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/09 18:13:37 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/10 16:13:52 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	lain_loop(t_data data)
 
 	while (1)
 	{
-		lain = readline("\033[1;32mlainshell:\033[0m ");
-		// lain = readline("minishell$ ");
+		//lain = readline("\033[1;32mlainshell:\033[0m ");
+		lain = readline("minishell$ ");
 		if (!lain)
 			exit_lain(data);
 		if (lain[0] != '\0')
@@ -58,6 +58,7 @@ void	lain_loop(t_data data)
 				trim_quotes(&data.args);
 				data.redir = get_redir(&data.args);
 				open_all_files(&data.redir, &data);
+				ft_close(&data.here_doc_fd);
 				if (data.args != NULL && is_valid(data.args))
 				{
 					data.cmd = make_cmd(data.args);
@@ -118,6 +119,7 @@ int	main(int ac, char **av, char **envp)
 	data.pipefd[1] = -1;
 	data.fd[0] = -1;
 	data.fd[1] = -1;
+	data.here_doc_fd = -1;
 	data.ecode = 0;
 	data.error_file = 0;
 	init_signal();
