@@ -46,5 +46,5 @@ After compiling, you can run the shell with:
 ```
 
 ## Credits
-Execution done by: [hzakharc](https://github.com/grysha11)
-Parsing done by: [gwagner](https://github.com/GeorgeLukasWagner)
+- Execution done by: [hzakharc](https://github.com/grysha11)
+- Parsing done by: [gwagner](https://github.com/GeorgeLukasWagner)
