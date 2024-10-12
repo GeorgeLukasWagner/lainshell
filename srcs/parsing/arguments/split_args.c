@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/22 14:44:07 by gwagner           #+#    #+#             */
-/*   Updated: 2024/09/16 20:14:36 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:58:59 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ t_args	*split_args(char *line)
 		else if ((line[i] == '"' || line[i] == '\'')
 			&& quotecheck(line, i, line[i]))
 			i = putquote(&list, line, i, line[i]);
-		else if (cmd)
+		else if (cmd && line[i])
 			cmd = putcmd(&list, line, &i);
 		else if (line[i])
 			i = putarg(&list, line, i);

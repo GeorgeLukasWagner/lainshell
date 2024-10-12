@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 12:58:08 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/10 16:41:32 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:01:17 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,8 +97,8 @@ void	execute_heredoc(t_alt **redir, t_data *data)
 			}
 			if (pid == 0)
 				here_doc(temp, data);
+			waitpid(pid, NULL, 0);
 		}
 		temp = temp->next;
 	}
-	wait(NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 13:49:02 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/10 16:42:57 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:02:20 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,18 +56,27 @@ int	ft_exit(t_data **data, char **argv)
 	int	ecode;
 
 	ecode = 0;
-	if (check_num(argv) == FALSE)
+	if (matrix_size(argv) > 2 && check_num(argv) == FALSE)
 	{
 		printf("minishell: numeric argument required\n");
-		ecode = 2;
-	}
-	else if (matrix_size(argv) > 2)
-	{
-		printf("minishell: too many arguments\n");
 		return (1);
 	}
+	if (matrix_size(argv) > 2)
+	{
+		printf("minishell to many arguments\n");
+		ecode = 2;
+	}
+	else if (check_num(argv) == FALSE)
+	{
+		printf("minishell: too many arguments\n");
+		ecode = 2;
+	}
 	else if (matrix_size(argv) == 2)
-		ecode = atoi(argv[1]);
+	{
+		ecode = ft_atoi(argv[1]);
+		if (ecode > 255)
+			ecode %= 128;
+	}
 	printf("exit\n");
 	clean_cmd(&(*data)->cmd);
 	free_cmd((*data)->cmd);

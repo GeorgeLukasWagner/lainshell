@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   argor.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 09:48:18 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/06 18:49:02 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/12 18:00:13 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,13 @@ void	trim_quotes(t_args **list)
 	}
 }
 
+int	is_tokenqute(char c)
+{
+	if (c == '|' || c == '<' || c == '>' || c == '\'' || c == '\"')
+		return (1);
+	return (0);
+}
+
 int	is_token(char c)
 {
 	if (c == '|' || c == '<' || c == '>')
@@ -90,7 +97,7 @@ size_t	special_len(char *str)
 	size_t	len;
 
 	len = 0;
-	while (str[len] && !is_space(str[len]) && !is_token(str[len]))
+	while (str[len] && !is_space(str[len]) && !is_tokenqute(str[len]))
 		len++;
 	return (len);
 }

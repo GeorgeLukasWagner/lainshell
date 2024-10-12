@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 15:48:27 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/10 16:15:53 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:04:51 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,42 @@
 
 int	is_flag(char *cmd)
 {
-	int	i;
+	size_t	i;
 
-	i = 1;
-	if (cmd[0] == '-')
-	{
-		while (cmd[i] == 'n')
-			i++;
-	}
-	if (cmd[i] != '\0')
-		return (TRUE);
+	i = 0;
+	if (ft_strlen(cmd) == 1)
+		return (0);
+	if (cmd[i] == '-')
+		i++;
 	else
-		return (FALSE);
+		return (0);
+	while (cmd[i] == 'n')
+		i++;
+	if (i == ft_strlen(cmd))
+		return (1);
+	return (0);
 }
 
 void	echo_util(int *nl, t_cmd *cmd, int i)
 {
-	if (ft_strlen(cmd->argv[i]) > 1)
+	int	cec;
+
+	cec = 0;
+	if (is_flag(cmd->argv[i]) == 1)
 	{
-		if (is_flag(cmd->argv[i]) == FALSE)
-		{
-			while (is_flag(cmd->argv[i]) == FALSE)
-				i++;
-			*nl = TRUE;
-		}
+		while (cmd->argv[i] && is_flag(cmd->argv[i]) == 1)
+			i++;
+		*nl = TRUE;
 	}
+	i = 1;
 	while (cmd->argv[i] != NULL)
 	{
-		printf("%s", cmd->argv[i]);
-		if (cmd->argv[i + 1] != NULL)
+		if (is_flag(cmd->argv[i]) == 0 || cec)
+		{
+			printf("%s", cmd->argv[i]);
+			cec = 1;
+		}
+		if (cmd->argv[i + 1] != NULL && is_flag(cmd->argv[i]) == 0)
 			printf(" ");
 		i++;
 	}

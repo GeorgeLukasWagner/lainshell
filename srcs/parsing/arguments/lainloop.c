@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/10 16:53:41 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/10 17:25:06 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/12 17:59:32 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,11 @@ void	lain_loop(t_data data)
 			add_history(lain);
 			data.args = split_args(lain);
 			put_vars(&data.args, data.env, data.ecode);
-			if (!syntax_error(data.args))
-				runthisbs(&data);
+			if (data.args && data.args->data[0])
+				if (!syntax_error(data.args))
+					runthisbs(&data);
 			free_list(&data.args);
 		}
 		free(lain);
 	}
 }
-
-//for beqa's tester prompt: lain = readline("minishell$ ");

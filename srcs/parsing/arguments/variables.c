@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+        */
+/*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/25 15:51:58 by gwagner           #+#    #+#             */
-/*   Updated: 2024/10/07 17:26:22 by gwagner          ###   ########.fr       */
+/*   Updated: 2024/10/12 17:57:48 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ void	check_var(t_args **list, t_env *env, int ecode)
 			if ((*list)->data[i] == '\0')
 				break ;
 		}
-		i++;
+		else
+			i++;
 	}
 }
 

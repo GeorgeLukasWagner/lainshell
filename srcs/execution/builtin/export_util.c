@@ -6,7 +6,7 @@
 /*   By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/07 10:18:42 by hzakharc          #+#    #+#             */
-/*   Updated: 2024/10/07 11:47:08 by hzakharc         ###   ########.fr       */
+/*   Updated: 2024/10/12 18:02:57 by hzakharc         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ void	print_exp_util(t_env *node)
 	{
 		temp = ft_split(node->data, '=');
 		printf("declare -x %s", temp[0]);
-		printf("=\"%s\"\n", temp[1]);
+		if (temp[1])
+			printf("=\"%s\"\n", temp[1]);
+		else
+			printf("=\"\"\n");
 		free_matrix(temp);
 	}
 }

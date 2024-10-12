@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: gwagner <gwagner@student.42wolfsburg.de    +#+  +:+       +#+         #
+#    By: hzakharc < hzakharc@student.42wolfsburg    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/18 15:17:27 by gwagner           #+#    #+#              #
-#    Updated: 2024/10/10 16:55:44 by gwagner          ###   ########.fr        #
+#    Updated: 2024/10/12 18:05:22 by hzakharc         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ COLOR		=	\033[0m
 CC				=	@cc -Wall -Werror -Wextra -g
 RM				=	@rm -f
 
-NAME			=	minishell
+NAME			=	lainshell
 
 %.o:			%.c
 					$(CC) -c $< -o $@
@@ -59,6 +59,7 @@ all:			$(NAME)
 $(NAME):		$(OBJS)
 					@make -sC $(LIBFT_DIR)
 					@$(CC) $(OBJS) ${LIBFT} -o $(NAME) -lreadline
+					@./lain.sh
 
 clean:
 					@make -sC $(LIBFT_DIR) clean
@@ -74,6 +75,6 @@ lain:
 				@firefox https://www.youtube.com/watch?v=MM8RufZr5lw
 
 runb: all
-	valgrind --leak-check=full ./minishell
+	valgrind --leak-check=full ./lainshell
 
 .PHONY:			all clean fclean re
